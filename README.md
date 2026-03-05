@@ -73,6 +73,7 @@ Open [http://localhost:3000](http://localhost:3000) and you're in. ✦
 ## Roadmap
 
 - [x] Coming soon page
+- [x] Hero Section and Login Pages
 - [ ] Project setup & auth
 - [ ] Quick capture + notes
 - [ ] Focus timer (Pomodoro)

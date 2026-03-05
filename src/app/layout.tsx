@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Brain Base — Coming Soon",
+  title: "Brain Base — Your Second Brain",
   description:
-    "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise. Coming soon.",
+    "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise. Just Clarity.",
   metadataBase: new URL("https://brainbase.pages.dev"),
   openGraph: {
-    title: "Brain Base — Coming Soon",
+    title: "Brain Base — Your Second Brain",
     description:
       "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise.",
     url: "https://brainbase.pages.dev",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Brain Base — Coming Soon",
+    title: "Brain Base — Your Second Brain",
     description:
       "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise.",
     images: ["/og-image.png"],
