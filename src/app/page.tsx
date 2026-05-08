@@ -1,11 +1,10 @@
-"use client";
-
+import { auth } from "@/auth";
 import BrainBase from "@/components/landing";
 
-export default function Hero() {
-  return (
-    <div className="min-h-screen h-full w-full">
-      <BrainBase />
-    </div>
-  );
+export default async function Home() {
+  const session = await auth();
+  const isAuthed = !!session?.user?.id;
+  const firstName = session?.user?.name?.split(" ")[0] ?? null;
+
+  return <BrainBase isAuthed={isAuthed} firstName={firstName} />;
 }

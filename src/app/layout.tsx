@@ -1,22 +1,28 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { RegisterSW } from "@/components/app/RegisterSW";
+import { Providers } from "@/components/app/Providers";
+import { ThemeProvider } from "@/components/app/ThemeProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Brain Base — Your Second Brain",
   description:
-    "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise. Just Clarity.",
+    "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise. Just clarity.",
   metadataBase: new URL("https://brainbase.pages.dev"),
+  applicationName: "Brain Base",
   openGraph: {
     title: "Brain Base — Your Second Brain",
     description:
@@ -34,9 +40,14 @@ export const metadata: Metadata = {
       "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise.",
     images: ["/og-image.png"],
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico" },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#191919" },
+  ],
 };
 
 export default function RootLayout({
@@ -45,11 +56,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Set theme class before paint to avoid flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');var s=window.matchMedia('(prefers-color-scheme: dark)').matches;var d=t==='dark'||((t==='system'||!t)&&s);if(d)document.documentElement.classList.add('dark');}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${geistMono.variable} antialiased bg-canvas text-ink`}
       >
-        {children}
+        <ThemeProvider>
+          <Providers>{children}</Providers>
+        </ThemeProvider>
+        <RegisterSW />
       </body>
     </html>
   );

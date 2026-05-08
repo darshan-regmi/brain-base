@@ -1,26 +1,222 @@
 @import "tailwindcss";
 
+/* Tailwind v4 — class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Brain Base — Notion design system (DESIGN.md derived)
+   Light + dark themes. Inter sans across every surface.
+   ───────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Type families */
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+  /* Kept for any remaining serif references — falls back to system serif */
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
+
+  /* Brand — Notion purple (signature CTA, both themes) */
+  --color-primary: #5645d4;
+  --color-primary-pressed: #4534b3;
+  --color-primary-deep: #3a2a99;
+  --color-on-primary: #ffffff;
+
+  /* Brand — navy (hero band on dark mode, accent in light) */
+  --color-navy: #0a1530;
+  --color-navy-deep: #070f24;
+  --color-navy-mid: #1a2a52;
+
+  /* Brand — link blue (inline links, NOT primary CTA) */
+  --color-link-blue: #0075de;
+  --color-link-blue-pressed: #005bab;
+
+  /* Brand — color spectrum (echoes Notion's database property colors) */
+  --color-brand-pink: #ff64c8;
+  --color-brand-pink-deep: #a02e6d;
+  --color-brand-orange: #dd5b00;
+  --color-brand-orange-deep: #793400;
+  --color-brand-purple: #7b3ff2;
+  --color-brand-purple-300: #d6b6f6;
+  --color-brand-purple-800: #391c57;
+  --color-brand-teal: #2a9d99;
+  --color-brand-green: #1aae39;
+  --color-brand-yellow: #f5d75e;
+  --color-brand-brown: #523410;
+
+  /* Card tints — pastel feature backgrounds (light mode native) */
+  --color-tint-peach: #ffe8d4;
+  --color-tint-rose: #fde0ec;
+  --color-tint-mint: #d9f3e1;
+  --color-tint-lavender: #e6e0f5;
+  --color-tint-sky: #dcecfa;
+  --color-tint-yellow: #fef7d6;
+  --color-tint-yellow-bold: #f9e79f;
+  --color-tint-cream: #f8f5e8;
+  --color-tint-gray: #f0eeec;
+
+  /* Semantic */
+  --color-success: #1aae39;
+  --color-warning: #dd5b00;
+  --color-error: #e03131;
+
+  /* Border radius — Notion: rectangles for buttons (8px), cards 12px */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Theme-aware tokens — these flip between light and dark
+   ───────────────────────────────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Surface (LIGHT) */
+  --color-canvas: #ffffff;
+  --color-surface: #f6f5f4;
+  --color-surface-soft: #fafaf9;
+  --color-hairline: #e5e3df;
+  --color-hairline-soft: #ede9e4;
+  --color-hairline-strong: #c8c4be;
+
+  /* Text (on light) */
+  --color-ink-deep: #000000;
+  --color-ink: #1a1a1a;
+  --color-charcoal: #37352f;
+  --color-slate: #5d5b54;
+  --color-steel: #787671;
+  --color-stone: #a4a097;
+  --color-muted: #bbb8b1;
+
+  /* Legacy compat — old code referenced these names */
+  --color-ink-0: #ffffff;
+  --color-ink-1: #ffffff;
+  --color-ink-2: #f6f5f4;
+  --color-vellum-1: rgba(0, 0, 0, 0.02);
+  --color-vellum-2: rgba(0, 0, 0, 0.04);
+  --color-vellum-3: rgba(0, 0, 0, 0.06);
+  --color-line-1: #e5e3df;
+  --color-line-2: #c8c4be;
+  --color-line-3: #787671;
+  --color-text-1: rgba(26, 26, 26, 0.95);
+  --color-text-2: rgba(26, 26, 26, 0.65);
+  --color-text-3: rgba(26, 26, 26, 0.42);
+  --color-text-4: rgba(26, 26, 26, 0.22);
+
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  /* Surface (DARK) — rgb(25,25,25) canvas, rgb(32,32,32) surface per spec */
+  --color-canvas: #191919;
+  --color-surface: #202020;
+  --color-surface-soft: #1c1c1c;
+  --color-hairline: rgba(255, 255, 255, 0.08);
+  --color-hairline-soft: rgba(255, 255, 255, 0.05);
+  --color-hairline-strong: rgba(255, 255, 255, 0.18);
+
+  /* Text (on dark) */
+  --color-ink-deep: #ffffff;
+  --color-ink: rgba(255, 255, 255, 0.95);
+  --color-charcoal: rgba(255, 255, 255, 0.85);
+  --color-slate: rgba(255, 255, 255, 0.62);
+  --color-steel: rgba(255, 255, 255, 0.48);
+  --color-stone: rgba(255, 255, 255, 0.32);
+  --color-muted: rgba(255, 255, 255, 0.22);
+
+  /* Legacy compat — dark variants */
+  --color-ink-0: #141414;
+  --color-ink-1: #191919;
+  --color-ink-2: #202020;
+  --color-vellum-1: rgba(255, 255, 255, 0.03);
+  --color-vellum-2: rgba(255, 255, 255, 0.05);
+  --color-vellum-3: rgba(255, 255, 255, 0.07);
+  --color-line-1: rgba(255, 255, 255, 0.08);
+  --color-line-2: rgba(255, 255, 255, 0.16);
+  --color-line-3: rgba(255, 255, 255, 0.32);
+  --color-text-1: rgba(255, 255, 255, 0.92);
+  --color-text-2: rgba(255, 255, 255, 0.62);
+  --color-text-3: rgba(255, 255, 255, 0.4);
+  --color-text-4: rgba(255, 255, 255, 0.22);
+
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Force light tokens on a subtree (used by the marketing landing page so it
+   stays in light mode regardless of the user's saved theme). */
+.force-light,
+.force-light * {
+  --color-canvas: #ffffff;
+  --color-surface: #f6f5f4;
+  --color-surface-soft: #fafaf9;
+  --color-hairline: #e5e3df;
+  --color-hairline-soft: #ede9e4;
+  --color-hairline-strong: #c8c4be;
+  --color-ink-deep: #000000;
+  --color-ink: #1a1a1a;
+  --color-charcoal: #37352f;
+  --color-slate: #5d5b54;
+  --color-steel: #787671;
+  --color-stone: #a4a097;
+  --color-muted: #bbb8b1;
+  --color-line-1: #e5e3df;
+  --color-line-2: #c8c4be;
+}
+.force-light {
+  background: #ffffff;
+  color: #1a1a1a;
+  color-scheme: light;
 }
 
+/* Hero scroll indicator — gentle bobbing dot inside a mouse outline. */
+@keyframes scroll-dot {
+  0% { transform: translateY(0); opacity: 0.85; }
+  60% { transform: translateY(10px); opacity: 0.05; }
+  100% { transform: translateY(0); opacity: 0.85; }
+}
+@keyframes scroll-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* Body */
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(86, 69, 212, 0.2);
+  color: var(--color-ink);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-hairline);
+  border-radius: 9999px;
+  border: 2px solid var(--color-canvas);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-hairline-strong);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
 }

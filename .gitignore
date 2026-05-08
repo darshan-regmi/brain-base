@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# ─── dependencies ─────────────────────────────────────────────────────────
 /node_modules
 /.pnp
 .pnp.*
@@ -10,32 +10,52 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-
-# next.js
+# ─── build output ─────────────────────────────────────────────────────────
 /.next/
 /out/
-
-# production
 /build
+/dist
+/coverage
 
-# misc
-.DS_Store
-*.pem
+# ─── env (never commit secrets — .env.example is the template) ────────────
+.env
+.env.*
+!.env.example
 
-# debug
+# ─── prisma (local sqlite + generated client) ─────────────────────────────
+# Catch the file at any depth — Prisma resolves `file:./prisma/dev.db`
+# relative to schema.prisma, which produces prisma/prisma/dev.db.
+**/dev.db
+**/dev.db-journal
+/prisma/migrations/**/migration_lock.toml.bak
+/src/generated/
+
+# ─── platform / tooling caches ────────────────────────────────────────────
+.vercel
+.netlify
+.turbo
+.cache
+
+# ─── editor / agent state ─────────────────────────────────────────────────
+.claude
+.cursor
+.idea
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.recommended.json
+
+# ─── typescript ───────────────────────────────────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
+
+# ─── logs / debug ─────────────────────────────────────────────────────────
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
 
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# ─── OS cruft ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.pem
