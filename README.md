@@ -5,7 +5,7 @@
 An open-source, self-hostable second brain — notes, focus timer, daily logs &
 learning tracker, all in one place. No subscriptions. No noise.
 
-**🌐 [brainbase.pages.dev](https://brainbase.pages.dev) — coming soon**
+**🌐 [brain-base-lake.vercel.app](https://brain-base-lake.vercel.app/) — IS NOW LIVE**
 
 ---
 
@@ -35,31 +35,31 @@ learning tracker, all in one place. No subscriptions. No noise.
 
 ## Features
 
-| Surface | What it does |
-| --- | --- |
-| **Quick Capture (⌘K)** | A spotlight modal you can summon from anywhere. Search existing notes or create a new one in one keystroke. |
-| **Notes** | A manuscript-style editor (Fraunces title, Geist body) with debounced autosave, tag editor, and `[[wikilink]]` parsing. |
-| **Focus Timer** | A single candle-stroke ring under the desk lamp. 25 / 5 / 15 minute modes, breathing animation when active, attendance dots logged to the database. |
-| **Daily Log** | One page per day, asymmetric two-column layout, rotating prompts, mood + energy sliders. Auto-creates today's entry on first visit. |
-| **Knowledge Base** | The "wall" — list view grouped by tag, or a force-directed graph with neighbor highlighting. Driven by `[[wikilinks]]`. |
-| **Learning Tracker** | A *Now Reading* hero strip plus filtered cards for Reading / Course / Watching with candle-thin progress bars. |
-| **Spaced Repetition** | A single index card under the lamp. 3-D flip, four-button rating, SM-2 scheduling. |
-| **PWA** | Installs like a native app. Service worker caches the app shell for offline reads. |
+| Surface                | What it does                                                                                                                                        |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Quick Capture (⌘K)** | A spotlight modal you can summon from anywhere. Search existing notes or create a new one in one keystroke.                                         |
+| **Notes**              | A manuscript-style editor (Fraunces title, Geist body) with debounced autosave, tag editor, and `[[wikilink]]` parsing.                             |
+| **Focus Timer**        | A single candle-stroke ring under the desk lamp. 25 / 5 / 15 minute modes, breathing animation when active, attendance dots logged to the database. |
+| **Daily Log**          | One page per day, asymmetric two-column layout, rotating prompts, mood + energy sliders. Auto-creates today's entry on first visit.                 |
+| **Knowledge Base**     | The "wall" — list view grouped by tag, or a force-directed graph with neighbor highlighting. Driven by `[[wikilinks]]`.                             |
+| **Learning Tracker**   | A _Now Reading_ hero strip plus filtered cards for Reading / Course / Watching with candle-thin progress bars.                                      |
+| **Spaced Repetition**  | A single index card under the lamp. 3-D flip, four-button rating, SM-2 scheduling.                                                                  |
+| **PWA**                | Installs like a native app. Service worker caches the app shell for offline reads.                                                                  |
 
 ---
 
 ## Tech Stack
 
-| Layer | Tech |
-| --- | --- |
-| Framework | Next.js 16 (App Router, Turbopack, React 19, React Compiler) |
-| Language | TypeScript 5 |
-| Styling | Tailwind CSS v4 (token-driven via `@theme`) |
-| Animation | Framer Motion |
-| Auth | NextAuth v5 (`next-auth@5-beta`) — Credentials, GitHub, Google |
-| Database | Prisma 6 — SQLite locally, Postgres in production |
-| Graph | `react-force-graph-2d` |
-| Shaders | `@paper-design/shaders-react` (landing + auth surfaces only) |
+| Layer     | Tech                                                           |
+| --------- | -------------------------------------------------------------- |
+| Framework | Next.js 16 (App Router, Turbopack, React 19, React Compiler)   |
+| Language  | TypeScript 5                                                   |
+| Styling   | Tailwind CSS v4 (token-driven via `@theme`)                    |
+| Animation | Framer Motion                                                  |
+| Auth      | NextAuth v5 (`next-auth@5-beta`) — Credentials, GitHub, Google |
+| Database  | Prisma 6 — SQLite locally, Postgres in production              |
+| Graph     | `react-force-graph-2d`                                         |
+| Shaders   | `@paper-design/shaders-react` (landing + auth surfaces only)   |
 
 ---
 
@@ -153,19 +153,21 @@ pnpm dev
 Open [http://localhost:3000](http://localhost:3000). Sign up at
 `/sign-up`, then you're dropped into `/dashboard`. ✦
 
+> **FOR MORE DETAILED GUIDE PLEASE REFER TO RUN-LOCALLY.md**
+
 ---
 
 ## Available Scripts
 
-| Command | What it does |
-| --- | --- |
-| `pnpm dev` | Start the dev server with Turbopack on port 3000 |
-| `pnpm build` | Build for production (runs `prisma generate` first) |
-| `pnpm start` | Start the production server |
-| `pnpm lint` | Run ESLint |
-| `pnpm db:push` | Sync Prisma schema → database (no migrations) |
-| `pnpm db:studio` | Open Prisma Studio |
-| `pnpm db:reset` | Wipe and recreate the database |
+| Command          | What it does                                        |
+| ---------------- | --------------------------------------------------- |
+| `pnpm dev`       | Start the dev server with Turbopack on port 3000    |
+| `pnpm build`     | Build for production (runs `prisma generate` first) |
+| `pnpm start`     | Start the production server                         |
+| `pnpm lint`      | Run ESLint                                          |
+| `pnpm db:push`   | Sync Prisma schema → database (no migrations)       |
+| `pnpm db:studio` | Open Prisma Studio                                  |
+| `pnpm db:reset`  | Wipe and recreate the database                      |
 
 ---
 
@@ -228,7 +230,7 @@ lit by candlelight. Design tokens live in `src/app/globals.css`:
 - **Color** — ink (canvas) + vellum (translucent paper) + a single candle
   accent (`#FAF3E1 → #F5E7C6`). No second accent.
 - **Motion** — three primitives (bloom / hover / press) plus one timer-only
-  *breathing* exception. Lives in `src/components/ui/motion.ts`.
+  _breathing_ exception. Lives in `src/components/ui/motion.ts`.
 - **Surfaces** — mesh gradient shaders are scoped to `/`, `/sign-in`,
   `/sign-up`, `/forgot-password` only. App pages stay flat for performance.
 
@@ -286,6 +288,8 @@ The 25 MB cap keeps row sizes reasonable; bump `MAX_BYTES` in
 
 **Cloudflare Pages** also works — same setup, but you'll need to wire
 `@cloudflare/next-on-pages` into the build.
+
+> **FOR MORE DETAILED GUIDE PLEASE REFER TO DEPLOYMENT.md**
 
 ---
 
@@ -353,7 +357,7 @@ server if the warning persists.
 - [x] Dark mode (Lamplight Editorial, committed — no light mode)
 - [x] PWA support (manifest + service-worker shell cache)
 - [ ] Docker setup
-- [ ] Public launch 🚀
+- [x] Public launch 🚀
 
 ---
 
