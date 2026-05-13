@@ -28,12 +28,12 @@ will fail in CI for the same reasons.
 SQLite (`file:./prisma/dev.db`) **does not work** in production on Vercel —
 the serverless filesystem is read-only and ephemeral. Pick one:
 
-| Provider           | Free tier | Setup link                                    |
-| ------------------ | --------- | --------------------------------------------- |
-| **Neon**           | Yes       | <https://console.neon.tech/>                  |
-| **Supabase**       | Yes       | <https://supabase.com/dashboard>              |
-| **Vercel Postgres**| Yes       | Add from the Vercel project's Storage tab     |
-| **Railway**        | Trial     | <https://railway.app/>                        |
+| Provider            | Free tier | Setup link                                |
+| ------------------- | --------- | ----------------------------------------- |
+| **Neon**            | Yes       | <https://console.neon.tech/>              |
+| **Supabase**        | Yes       | <https://supabase.com/dashboard>          |
+| **Vercel Postgres** | Yes       | Add from the Vercel project's Storage tab |
+| **Railway**         | Trial     | <https://railway.app/>                    |
 
 After creating the database, copy its connection string. It will look like:
 
@@ -112,17 +112,17 @@ Or push to an existing remote — Vercel needs a git source to import.
 ## 5. Environment variables
 
 Add these in the Vercel project's **Settings → Environment Variables** (set
-them for Production *and* Preview unless noted):
+them for Production _and_ Preview unless noted):
 
-| Variable                | Required | Example / How to generate                                              |
-| ----------------------- | -------- | ---------------------------------------------------------------------- |
-| `DATABASE_URL`          | Yes      | Postgres connection string from step 1                                 |
-| `AUTH_SECRET`           | Yes      | `openssl rand -hex 32` (a fresh 32-byte hex string — never reuse dev)  |
-| `AUTH_URL`              | Yes      | Your production origin, e.g. `https://your-app.vercel.app`             |
-| `GITHUB_CLIENT_ID`      | Optional | From GitHub OAuth app                                                  |
-| `GITHUB_CLIENT_SECRET`  | Optional | From GitHub OAuth app                                                  |
-| `GOOGLE_CLIENT_ID`      | Optional | From Google Cloud Console                                              |
-| `GOOGLE_CLIENT_SECRET`  | Optional | From Google Cloud Console                                              |
+| Variable               | Required | Example / How to generate                                             |
+| ---------------------- | -------- | --------------------------------------------------------------------- |
+| `DATABASE_URL`         | Yes      | Postgres connection string from step 1                                |
+| `AUTH_SECRET`          | Yes      | `openssl rand -hex 32` (a fresh 32-byte hex string — never reuse dev) |
+| `AUTH_URL`             | Yes      | Your production origin, e.g. `https://your-app.vercel.app`            |
+| `GITHUB_CLIENT_ID`     | Optional | From GitHub OAuth app                                                 |
+| `GITHUB_CLIENT_SECRET` | Optional | From GitHub OAuth app                                                 |
+| `GOOGLE_CLIENT_ID`     | Optional | From Google Cloud Console                                             |
+| `GOOGLE_CLIENT_SECRET` | Optional | From Google Cloud Console                                             |
 
 > **Critical:** rotate `AUTH_SECRET` for production. Never reuse the value
 > from your local `.env`. If it leaks, every existing session JWT becomes
@@ -144,10 +144,10 @@ pnpm exec prisma migrate deploy && pnpm build
 If you set GitHub / Google credentials in step 5, update the callback URLs
 in the provider's dashboard to point at your production origin:
 
-| Provider | Callback URL                                                     |
-| -------- | ---------------------------------------------------------------- |
-| GitHub   | `https://your-app.vercel.app/api/auth/callback/github`           |
-| Google   | `https://your-app.vercel.app/api/auth/callback/google`           |
+| Provider | Callback URL                                           |
+| -------- | ------------------------------------------------------ |
+| GitHub   | `https://your-app.vercel.app/api/auth/callback/github` |
+| Google   | `https://your-app.vercel.app/api/auth/callback/google` |
 
 If you'll use Vercel Preview deployments with OAuth, add the preview origin
 as an additional callback URL on the provider too.
