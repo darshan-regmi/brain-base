@@ -9,6 +9,7 @@ import { AppSidebar } from "@/components/app/AppSidebar";
 import { AppTopbar } from "@/components/app/AppTopbar";
 import { TagPill, bloom, stagger } from "@/components/ui";
 import { cn } from "@/lib/utils";
+import { useResponsiveSidebar } from "@/lib/use-responsive-sidebar";
 
 type View = "list" | "graph";
 
@@ -43,7 +44,7 @@ export function KbShell({
   links: Link[];
   tags: string[];
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useResponsiveSidebar();
   const [view, setView] = useState<View>("list");
   const [search, setSearch] = useState("");
 
@@ -80,7 +81,12 @@ export function KbShell({
 
   return (
     <div className="min-h-screen flex bg-ink-1 font-sans">
-      <AppSidebar user={user} open={sidebarOpen} tags={tags} />
+      <AppSidebar
+        user={user}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        tags={tags}
+      />
 
       <div className="flex-1 flex flex-col min-w-0">
         <AppTopbar
@@ -91,9 +97,9 @@ export function KbShell({
         />
 
         <main className="flex-1 flex flex-col overflow-hidden">
-          <div className="px-8 pt-8 pb-4 flex items-center justify-between">
-            <div>
-              <h1 className="font-serif text-text-1 text-3xl font-light tracking-tight">
+          <div className="px-4 sm:px-6 md:px-8 pt-6 sm:pt-8 pb-4 flex flex-wrap items-center justify-between gap-3">
+            <div className="min-w-0">
+              <h1 className="font-serif text-text-1 text-2xl sm:text-3xl font-light tracking-tight">
                 The Wall
               </h1>
               <p className="text-text-3 text-xs font-light mt-1">
@@ -101,7 +107,7 @@ export function KbShell({
               </p>
             </div>
 
-            <div className="flex items-center gap-1 p-1 rounded-full bg-vellum-2 border border-line-1">
+            <div className="flex items-center gap-1 p-1 rounded-full bg-vellum-2 border border-line-1 shrink-0">
               <ViewToggle
                 active={view === "list"}
                 onClick={() => setView("list")}
@@ -118,7 +124,7 @@ export function KbShell({
           </div>
 
           {view === "list" ? (
-            <div className="flex-1 overflow-y-auto px-8 pb-12">
+            <div className="flex-1 overflow-y-auto px-4 sm:px-6 md:px-8 pb-12">
               {groupedByTag.length === 0 && (
                 <div className="text-center py-24">
                   <p className="font-serif text-text-2 text-2xl font-light">

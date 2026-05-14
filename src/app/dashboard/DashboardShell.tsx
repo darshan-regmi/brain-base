@@ -19,6 +19,7 @@ import { Spotlight } from "@/components/app/Spotlight";
 import { Surface, StatCard, bloom, stagger } from "@/components/ui";
 import type { NoteListItem, DashboardStats } from "@/lib/notes";
 import { createNote } from "@/app/actions/notes";
+import { useResponsiveSidebar } from "@/lib/use-responsive-sidebar";
 
 const FOCUS_DAILY_TARGET = 6;
 
@@ -38,7 +39,7 @@ export function DashboardShell({
   todayFocusCount: number;
 }) {
   const router = useRouter();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useResponsiveSidebar();
   const [spotlightOpen, setSpotlightOpen] = useState(false);
   const [, startTransition] = useTransition();
 
@@ -50,7 +51,12 @@ export function DashboardShell({
 
   return (
     <div className="min-h-screen flex bg-ink-1 font-sans">
-      <AppSidebar user={user} open={sidebarOpen} onNewNote={handleNewNote} />
+      <AppSidebar
+        user={user}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        onNewNote={handleNewNote}
+      />
 
       <div className="flex-1 flex flex-col min-w-0">
         <AppTopbar
@@ -58,7 +64,7 @@ export function DashboardShell({
           onOpenSpotlight={() => setSpotlightOpen(true)}
         />
 
-        <main className="flex-1 p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto">
           <OverviewPanel
             userName={user.name}
             stats={stats}
@@ -127,7 +133,7 @@ function OverviewPanel({
         <ClockHeader greeting={`Hello, ${firstName}.`} />
       </motion.div>
 
-      <motion.div variants={bloom} className="grid grid-cols-3 gap-4">
+      <motion.div variants={bloom} className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         {statValues.map((s) => (
           <StatCard
             key={s.label}
@@ -207,14 +213,14 @@ function ClockHeader({ greeting }: { greeting: string }) {
         <p className="text-text-4 text-xs tracking-widest uppercase mb-2">
           {dateStr}
         </p>
-        <h1 className="font-serif text-text-1 text-4xl font-light tracking-tight">
+        <h1 className="font-serif text-text-1 text-2xl sm:text-3xl md:text-4xl font-light tracking-tight">
           {greeting}
         </h1>
       </div>
       <p
         className="font-serif text-text-1 tabular-nums"
         style={{
-          fontSize: "clamp(36px, 4vw, 56px)",
+          fontSize: "clamp(28px, 6vw, 56px)",
           lineHeight: 1,
           fontWeight: 300,
           letterSpacing: "-0.02em",

@@ -10,6 +10,7 @@ import { Spotlight } from "@/components/app/Spotlight";
 import { NoteCardMenu } from "@/components/app/NoteCardMenu";
 import { Surface, bloom, stagger } from "@/components/ui";
 import type { NoteListItem } from "@/lib/notes";
+import { useResponsiveSidebar } from "@/lib/use-responsive-sidebar";
 import {
   createNote,
   toggleStar as toggleStarAction,
@@ -35,7 +36,7 @@ export function NotesShell({
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState<Filter>("all");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useResponsiveSidebar();
   const [spotlightOpen, setSpotlightOpen] = useState(false);
   const [, startTransition] = useTransition();
 
@@ -125,6 +126,7 @@ export function NotesShell({
       <AppSidebar
         user={user}
         open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
         tags={tags}
         filterCounts={filterCounts}
         activeFilter={activeFilter}
@@ -140,10 +142,10 @@ export function NotesShell({
           onOpenSpotlight={() => setSpotlightOpen(true)}
         />
 
-        <main className="flex-1 p-8 overflow-y-auto">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h1 className="font-serif text-text-1 text-2xl font-light tracking-tight">
+        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <div className="min-w-0">
+              <h1 className="font-serif text-text-1 text-xl sm:text-2xl font-light tracking-tight">
                 {filterLabel[activeFilter]}
               </h1>
               <p className="text-text-3 text-xs mt-0.5">
@@ -156,7 +158,7 @@ export function NotesShell({
             {inTrash && archivedNotes.length > 0 && (
               <button
                 onClick={handleEmptyTrash}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-line-2 text-xs font-medium text-[#e03131] hover:bg-[rgba(224,49,49,0.08)] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-line-2 text-xs font-medium text-[#e03131] hover:bg-[rgba(224,49,49,0.08)] transition-colors shrink-0"
               >
                 Empty trash
               </button>
