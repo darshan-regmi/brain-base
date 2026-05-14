@@ -145,7 +145,7 @@ function Hero({
     : "Get Brain Base free";
 
   return (
-    <section className="relative overflow-hidden bg-white pt-20 md:pt-28">
+    <section className="relative overflow-hidden bg-white pt-24 sm:pt-28 md:pt-32">
       {/* Animated Notion-palette mesh — the "mesh wire illustration" decoration */}
       <MeshBackdrop theme="light" vignette="edge" intensity={0.85} />
 
@@ -164,7 +164,7 @@ function Hero({
       {/* Sticky-note dots — scattered brand-color spots per the Notion hero */}
       <StickyNoteDots />
 
-      <div className="relative z-20 max-w-[1280px] mx-auto px-6 md:px-8 pb-12 md:pb-16">
+      <div className="relative z-20 max-w-[1280px] mx-auto px-5 sm:px-6 md:px-8 pb-12 md:pb-16">
         {/* Eyebrow chip */}
         <motion.div
           className="mx-auto inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-[#e5e3df] backdrop-blur-md shadow-[0_1px_2px_rgba(15,15,15,0.04)]"
@@ -361,16 +361,16 @@ function WorkspaceMockup() {
         </span>
       </div>
 
-      <div className="grid grid-cols-12 min-h-[460px]">
-        {/* Sidebar */}
-        <aside className="col-span-3 border-r border-[#e5e3df] bg-[#fafaf9] p-3 flex flex-col gap-1">
-          <div className="px-2 py-1 mb-2">
+      <div className="grid grid-cols-1 sm:grid-cols-12 min-h-[460px]">
+        {/* Sidebar — collapses to a horizontal scroll chip-row on small screens */}
+        <aside className="sm:col-span-4 md:col-span-3 border-b sm:border-b-0 sm:border-r border-[#e5e3df] bg-[#fafaf9] p-3 flex sm:flex-col gap-1 overflow-x-auto sm:overflow-visible">
+          <div className="hidden sm:block px-2 py-1 mb-2">
             <Wordmark size="sm" href={null} />
           </div>
           <input
             disabled
             placeholder="Search…"
-            className="text-[12px] px-2.5 py-1.5 rounded-md bg-white border border-[#e5e3df] text-[#787671] mb-2 outline-none"
+            className="hidden sm:block text-[12px] px-2.5 py-1.5 rounded-md bg-white border border-[#e5e3df] text-[#787671] mb-2 outline-none"
           />
           {[
             { l: "Dashboard", icon: "▦", active: true },
@@ -383,7 +383,7 @@ function WorkspaceMockup() {
           ].map((item) => (
             <div
               key={item.l}
-              className="flex items-center gap-2 px-2 py-1.5 rounded-md"
+              className="flex items-center gap-2 px-2 py-1.5 rounded-md shrink-0"
               style={{
                 background: item.active ? "#e6e0f5" : "transparent",
               }}
@@ -395,7 +395,7 @@ function WorkspaceMockup() {
                 {item.icon}
               </span>
               <span
-                className="text-[12px]"
+                className="text-[12px] whitespace-nowrap"
                 style={{
                   color: item.active ? "#391c57" : "#37352f",
                   fontWeight: item.active ? 600 : 500,
@@ -408,7 +408,7 @@ function WorkspaceMockup() {
         </aside>
 
         {/* Main */}
-        <div className="col-span-9 p-5 flex flex-col gap-4 bg-white">
+        <div className="sm:col-span-8 md:col-span-9 p-4 sm:p-5 flex flex-col gap-4 bg-white">
           <div className="flex items-baseline justify-between">
             <h3
               className="text-[#1a1a1a]"
@@ -422,7 +422,7 @@ function WorkspaceMockup() {
           </div>
 
           {/* Stat row */}
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {[
               { l: "Notes", v: "124", tint: "#dcecfa" },
               { l: "Streak", v: "12d", tint: "#d9f3e1" },
@@ -454,7 +454,7 @@ function WorkspaceMockup() {
             ))}
           </div>
 
-          <div className="grid grid-cols-2 gap-3 flex-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 flex-1">
             {/* Recent notes */}
             <div className="rounded-lg border border-[#e5e3df] bg-white p-3">
               <p
@@ -580,7 +580,7 @@ function BoldYellowBanner() {
   return (
     <Section className="bg-white">
       <motion.div
-        className="rounded-xl p-8 md:p-12"
+        className="rounded-xl p-6 sm:p-8 md:p-12"
         style={{ background: "#f9e79f" }}
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -958,11 +958,8 @@ function CTABanner({ isAuthed }: { isAuthed: boolean }) {
   return (
     <section className="px-6 md:px-12 py-12 md:py-20 bg-white">
       <motion.div
-        className="max-w-[1280px] mx-auto rounded-xl text-center relative overflow-hidden"
-        style={{
-          background: "#f6f5f4",
-          padding: "64px 32px",
-        }}
+        className="max-w-[1280px] mx-auto rounded-xl text-center relative overflow-hidden px-6 py-12 sm:px-8 sm:py-14 md:py-16"
+        style={{ background: "#f6f5f4" }}
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
@@ -1046,15 +1043,12 @@ function Footer() {
 
   return (
     <footer
-      className="bg-white px-6 md:px-12"
-      style={{
-        borderTop: "1px solid #e5e3df",
-        padding: "64px 24px",
-      }}
+      className="bg-white px-5 sm:px-6 md:px-12 py-12 sm:py-14 md:py-16"
+      style={{ borderTop: "1px solid #e5e3df" }}
     >
       <div className="max-w-[1280px] mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-12">
-          <div className="col-span-2 md:col-span-1 flex flex-col gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 sm:gap-10 mb-10 sm:mb-12">
+          <div className="col-span-2 sm:col-span-3 md:col-span-1 flex flex-col gap-3">
             <Wordmark size="md" href={null} />
             <p
               className="text-[#787671] max-w-[220px]"
@@ -1138,7 +1132,7 @@ function Section({
   return (
     <section
       id={id}
-      className={`px-6 md:px-12 py-20 md:py-28 ${className}`}
+      className={`px-5 sm:px-6 md:px-12 py-16 sm:py-20 md:py-28 ${className}`}
     >
       <div className="max-w-[1280px] mx-auto">{children}</div>
     </section>
