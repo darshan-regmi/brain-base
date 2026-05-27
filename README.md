@@ -72,7 +72,7 @@ learning tracker, all in one place. No subscriptions. No noise.
 
 ```bash
 # Install pnpm if you don't have it
-npm install -g pnpm
+pnpm install -g pnpm
 ```
 
 ### 1. Clone the repository
