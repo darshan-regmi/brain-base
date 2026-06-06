@@ -65,7 +65,10 @@ export async function reviewCard(id: string, quality: number) {
     quality,
   );
 
-  const dueAt = new Date(Date.now() + next.interval * 24 * 60 * 60 * 1000);
+  const dueAt =
+    next.interval === 0
+      ? new Date() // Due now for immediate re-review
+      : new Date(Date.now() + next.interval * 24 * 60 * 60 * 1000);
 
   await prisma.reviewCard.update({
     where: { id },

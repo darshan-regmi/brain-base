@@ -21,7 +21,7 @@ export function review(card: SM2Card, quality: number): SM2Card {
   if (q < 3) {
     // Failure — reset
     repetitions = 0;
-    interval = 1;
+    interval = 0;
   } else {
     if (repetitions === 0) interval = 1;
     else if (repetitions === 1) interval = 6;
