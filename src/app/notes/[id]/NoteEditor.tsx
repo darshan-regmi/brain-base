@@ -21,6 +21,7 @@ import {
   setTags,
 } from "@/app/actions/notes";
 import { relativeTime } from "@/lib/dates";
+import { useResponsiveSidebar } from "@/lib/use-responsive-sidebar";
 
 type Note = {
   id: string;
@@ -50,7 +51,7 @@ export function NoteEditor({
   const [starred, setStarred] = useState(note.starred);
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [savedAt, setSavedAt] = useState<Date>(new Date(note.updatedAt));
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useResponsiveSidebar();
   const [spotlightOpen, setSpotlightOpen] = useState(false);
   const [tagInput, setTagInput] = useState("");
   const [, startTransition] = useTransition();
@@ -118,6 +119,7 @@ export function NoteEditor({
       <AppSidebar
         user={user}
         open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
         tags={allTags}
         onNewNote={undefined}
       />
@@ -129,8 +131,8 @@ export function NoteEditor({
         />
 
         <main className="flex-1 overflow-y-auto">
-          <div className="max-w-3xl mx-auto px-8 py-12">
-            <div className="flex items-center justify-between mb-8">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 py-8 md:py-12">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-6 sm:mb-8">
               <Link
                 href="/dashboard"
                 className="inline-flex items-center gap-1.5 text-text-3 hover:text-text-2 text-xs font-light transition-colors"
@@ -161,7 +163,7 @@ export function NoteEditor({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Untitled."
-              className="w-full bg-transparent font-serif text-text-1 text-5xl font-light leading-tight outline-none placeholder:text-text-4 mb-6"
+              className="w-full bg-transparent font-serif text-text-1 text-3xl sm:text-4xl md:text-5xl font-light leading-tight outline-none placeholder:text-text-4 mb-6"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}

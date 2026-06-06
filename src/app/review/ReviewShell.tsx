@@ -7,6 +7,7 @@ import { AppSidebar } from "@/components/app/AppSidebar";
 import { AppTopbar } from "@/components/app/AppTopbar";
 import { CandleButton, Field, Surface } from "@/components/ui";
 import { cn } from "@/lib/utils";
+import { useResponsiveSidebar } from "@/lib/use-responsive-sidebar";
 import {
   createCard,
   reviewCard,
@@ -35,7 +36,7 @@ export function ReviewShell({
   queue: Card[];
   totalCards: number;
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useResponsiveSidebar();
   const [adding, setAdding] = useState(false);
   const [importing, setImporting] = useState(false);
   const [index, setIndex] = useState(0);
@@ -56,16 +57,20 @@ export function ReviewShell({
 
   return (
     <div className="min-h-screen flex bg-ink-1 font-sans">
-      <AppSidebar user={user} open={sidebarOpen} />
+      <AppSidebar
+        user={user}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
       <div className="flex-1 flex flex-col min-w-0">
         <AppTopbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
-        <main className="flex-1 flex flex-col items-center justify-center px-8 py-8 relative">
-          {/* Counter — top-right */}
-          <div className="absolute top-6 right-8 flex items-center gap-3">
+        <main className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 py-6 sm:py-8 relative">
+          {/* Action header — wraps on small screens, absolute-pinned on lg+ */}
+          <div className="w-full max-w-xl mb-6 lg:mb-0 lg:absolute lg:top-6 lg:right-8 lg:w-auto lg:max-w-none flex flex-wrap items-center justify-end gap-2 sm:gap-3">
             {total > 0 && (
-              <p className="font-serif text-text-3 text-sm font-light tabular-nums">
+              <p className="font-serif text-text-3 text-sm font-light tabular-nums mr-auto lg:mr-0">
                 <span className="text-text-1">{Math.min(index + 1, total)}</span>{" "}
                 of {total}
               </p>
@@ -151,7 +156,7 @@ export function ReviewShell({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 12 }}
                     transition={{ duration: 0.3 }}
-                    className="grid grid-cols-4 gap-2 mt-8"
+                    className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-6 sm:mt-8"
                   >
                     <ReviewBtn
                       label="Again"
@@ -233,7 +238,7 @@ function Face({
   return (
     <div
       className={cn(
-        "absolute inset-0 rounded-2xl bg-vellum-1 border border-line-1 p-10 flex items-center justify-center text-center backface-hidden",
+        "absolute inset-0 rounded-2xl bg-vellum-1 border border-line-1 p-6 sm:p-10 flex items-center justify-center text-center backface-hidden",
         side === "back" && "[transform:rotateY(180deg)]",
       )}
       style={{ backfaceVisibility: "hidden" }}

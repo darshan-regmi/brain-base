@@ -9,6 +9,7 @@ import { AppTopbar } from "@/components/app/AppTopbar";
 import { upsertDailyLog } from "@/app/actions/log";
 import { fromDateString, prettyDate, shortDate, toDateString } from "@/lib/dates";
 import { cn } from "@/lib/utils";
+import { useResponsiveSidebar } from "@/lib/use-responsive-sidebar";
 
 const PROMPTS = [
   "What did today actually mean?",
@@ -46,7 +47,7 @@ export function LogShell({
   entry: { content: string; mood: number | null; energy: number | null };
   recent: { dateString: string; hasContent: boolean }[];
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useResponsiveSidebar();
   const [content, setContent] = useState(entry.content);
   const [mood, setMood] = useState<number>(entry.mood ?? 50);
   const [energy, setEnergy] = useState<number>(entry.energy ?? 50);
@@ -90,13 +91,17 @@ export function LogShell({
 
   return (
     <div className="min-h-screen flex bg-ink-1 font-sans">
-      <AppSidebar user={user} open={sidebarOpen} />
+      <AppSidebar
+        user={user}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
       <div className="flex-1 flex flex-col min-w-0">
         <AppTopbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
         <main className="flex-1 overflow-y-auto">
-          <div className="grid grid-cols-12 gap-8 px-8 py-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-12 gap-6 lg:gap-8 px-4 sm:px-6 md:px-8 py-8 md:py-12 max-w-6xl mx-auto">
             {/* Entry — left 2/3 */}
             <motion.section
               className="col-span-12 lg:col-span-8"
@@ -111,11 +116,11 @@ export function LogShell({
                 <SaveDot state={saveState} />
               </div>
 
-              <h1 className="font-serif text-text-1 text-5xl font-light tracking-tight mb-4">
+              <h1 className="font-serif text-text-1 text-3xl sm:text-4xl md:text-5xl font-light tracking-tight mb-4">
                 {prettyDate(date)}
               </h1>
 
-              <p className="font-serif italic text-text-3 text-lg font-light mb-10">
+              <p className="font-serif italic text-text-3 text-base sm:text-lg font-light mb-8 sm:mb-10">
                 {prompt}
               </p>
 

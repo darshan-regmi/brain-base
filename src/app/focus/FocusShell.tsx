@@ -16,6 +16,7 @@ import { AppSidebar } from "@/components/app/AppSidebar";
 import { AppTopbar } from "@/components/app/AppTopbar";
 import { logFocusSession } from "@/app/actions/focus";
 import { push as pushNotif, requestNativePermission } from "@/lib/notifications-client";
+import { useResponsiveSidebar } from "@/lib/use-responsive-sidebar";
 
 type Mode = "FOCUS" | "SHORT_BREAK" | "LONG_BREAK" | "CUSTOM";
 
@@ -116,7 +117,7 @@ export function FocusShell({
   user: { name: string; email: string };
   initialTodayCount: number;
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useResponsiveSidebar();
   const [mode, setMode] = useState<Mode>("FOCUS");
   const [customMin, setCustomMin] = useState(50);
   const [running, setRunning] = useState(false);
@@ -308,25 +309,29 @@ export function FocusShell({
 
   return (
     <div className="min-h-screen flex bg-ink-1 font-sans">
-      <AppSidebar user={user} open={sidebarOpen} />
+      <AppSidebar
+        user={user}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
       <div className="flex-1 flex flex-col min-w-0">
         <AppTopbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
-        <main className="flex-1 flex flex-col items-center justify-center px-8 py-8 relative">
+        <main className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 py-6 sm:py-8 relative">
           {/* Sound toggle — top-right */}
           <button
             onClick={toggleSound}
-            className="absolute top-6 right-8 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border border-line-1 text-text-3 hover:text-text-1 hover:border-line-2 transition-colors text-[10px] tracking-wider uppercase"
+            className="absolute top-3 right-3 sm:top-6 sm:right-8 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border border-line-1 text-text-3 hover:text-text-1 hover:border-line-2 transition-colors text-[10px] tracking-wider uppercase"
             title={soundOn ? "Mute alarm" : "Unmute alarm"}
           >
             {soundOn ? <Bell className="w-3 h-3" /> : <BellOff className="w-3 h-3" />}
             {soundOn ? "Sound on" : "Muted"}
           </button>
 
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center w-full">
             <motion.div
-              className="relative"
+              className="relative w-[min(400px,82vw)] aspect-square"
               animate={running ? { scale: [1, 1.005, 1] } : { scale: 1 }}
               transition={
                 running
@@ -334,7 +339,11 @@ export function FocusShell({
                   : { duration: 0.3 }
               }
             >
-              <svg width={400} height={400} className="-rotate-90">
+              <svg
+                viewBox="0 0 400 400"
+                className="-rotate-90 w-full h-full"
+                preserveAspectRatio="xMidYMid meet"
+              >
                 <defs>
                   <linearGradient id="candle-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#5645d4" />

@@ -28,6 +28,7 @@ import {
   stagger,
 } from "@/components/ui";
 import { cn } from "@/lib/utils";
+import { useResponsiveSidebar } from "@/lib/use-responsive-sidebar";
 import {
   createResource,
   updateResource,
@@ -69,7 +70,7 @@ export function LearnShell({
   user: { name: string; email: string };
   resources: Resource[];
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useResponsiveSidebar();
   const [filter, setFilter] = useState<Kind | "ALL">("ALL");
   const [active, setActive] = useState<Resource | null>(null);
   const [adding, setAdding] = useState(false);
@@ -82,15 +83,19 @@ export function LearnShell({
 
   return (
     <div className="min-h-screen flex bg-ink-1 font-sans">
-      <AppSidebar user={user} open={sidebarOpen} />
+      <AppSidebar
+        user={user}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
       <div className="flex-1 flex flex-col min-w-0">
         <AppTopbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
-        <main className="flex-1 overflow-y-auto px-8 py-10 max-w-5xl mx-auto w-full">
-          <div className="flex items-end justify-between mb-3">
-            <div>
-              <h1 className="font-serif text-text-1 text-3xl font-light tracking-tight">
+        <main className="flex-1 overflow-y-auto px-4 sm:px-6 md:px-8 py-8 md:py-10 max-w-5xl mx-auto w-full">
+          <div className="flex flex-wrap items-end justify-between gap-3 mb-3">
+            <div className="min-w-0">
+              <h1 className="font-serif text-text-1 text-2xl sm:text-3xl font-light tracking-tight">
                 Learning
               </h1>
               <p className="text-text-3 text-sm font-light mt-1">
