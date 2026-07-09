@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.16.0
-          cache: pnpm
-      - run: pnpm ci
-      - run: pnpm run lint
-      - run: pnpm run build
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
