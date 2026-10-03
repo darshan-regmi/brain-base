@@ -4,6 +4,7 @@ import "./globals.css";
 import { RegisterSW } from "@/components/app/RegisterSW";
 import { Providers } from "@/components/app/Providers";
 import { ThemeProvider } from "@/components/app/ThemeProvider";
+import { REPO_URL, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,15 +22,41 @@ export const metadata: Metadata = {
   title: "Brain Base — Your Second Brain",
   description:
     "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise. Just clarity.",
-  metadataBase: new URL("https://brainbase.pages.dev"),
-  applicationName: "Brain Base",
+  // Resolves relative OG/canonical/icon URLs. Was hard-coded to
+  // https://brainbase.pages.dev, which is not the deployed host.
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
+  // No `alternates.canonical` here on purpose: root-layout metadata is
+  // inherited by every route, so declaring it up here would tag /sign-in and
+  // the session-gated routes as duplicates of the homepage. The landing page
+  // (app/page.tsx) declares its own.
+  authors: [{ name: "Darshan Regmi", url: REPO_URL }],
+  creator: "Darshan Regmi",
+  keywords: [
+    "second brain",
+    "open source notes app",
+    "pomodoro timer",
+    "focus timer",
+    "spaced repetition",
+    "daily journal",
+    "knowledge base",
+    "self hosted",
+    "productivity app",
+  ],
   openGraph: {
     title: "Brain Base — Your Second Brain",
     description:
       "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise.",
-    url: "https://brainbase.pages.dev",
-    siteName: "Brain Base",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    url: "/",
+    siteName: SITE_NAME,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Brain Base — an open-source second brain app",
+      },
+    ],
     locale: "en_US",
     type: "website",
   },
@@ -40,7 +67,19 @@ export const metadata: Metadata = {
       "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise.",
     images: ["/og-image.png"],
   },
-  icons: { icon: "/favicon.ico" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon-512.png",
+  },
 };
 
 export const viewport: Viewport = {
