@@ -582,8 +582,12 @@ function BoldYellowBanner() {
       <motion.div
         className="rounded-xl p-6 sm:p-8 md:p-12"
         style={{ background: "#f9e79f" }}
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        /* Animate position only. Starting at opacity 0 ships this section as
+           `style="opacity:0"` and whileInView only fires on IntersectionObserver,
+           so the copy is invisible in the served HTML until something scrolls it
+           into view — bad for crawlers and for anyone whose JS never runs. */
+        initial={{ y: 16 }}
+        whileInView={{ y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
@@ -721,8 +725,8 @@ function FeatureCard({
   const Icon = feature.icon;
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 16 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, margin: "-15%" }}
       transition={{
         duration: 0.5,
@@ -789,8 +793,8 @@ function Philosophy() {
         </div>
         <motion.div
           className="col-span-12 md:col-span-7 md:col-start-6"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 16 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-20%" }}
           transition={{ duration: 0.6 }}
         >
@@ -960,8 +964,8 @@ function CTABanner({ isAuthed }: { isAuthed: boolean }) {
       <motion.div
         className="max-w-[1280px] mx-auto rounded-xl text-center relative overflow-hidden px-6 py-12 sm:px-8 sm:py-14 md:py-16"
         style={{ background: "#f6f5f4" }}
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ y: 16 }}
+        whileInView={{ y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
         transition={{ duration: 0.6 }}
       >
