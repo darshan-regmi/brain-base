@@ -61,8 +61,8 @@ Four clusters, one owning page each. Do not spin up a URL per question.
 ### Cluster E — Project and author trust
 
 - **Intent:** branded ("Brain Base Darshan Regmi", "who made Brain Base").
-- **Owning URL today:** none. Footer links to GitHub.
-- **Recommended next page:** `/about` — the highest-value trust addition after deploy.
+- **Owning URL today:** `/about` exists as a draft, but is noindex and not in the sitemap.
+- **Recommended next step:** fill the owner facts in `/about` and publish it; it is the highest-value trust addition after deploy.
 - **Unique material needed:** real bio, origin story, project principles, contact.
 
 ## Home page metadata options
@@ -109,7 +109,7 @@ Six questions are already visible on `/` and should stay there. Future questions
 
 ## Page briefs
 
-### 1. `/about` (recommended next)
+### 1. `/about` (scaffolded, noindex draft)
 
 - **Title options:** `About Brain Base and its author | Brain Base` (44) / `Why I built Brain Base — about the project` (42)
 - **Description:** `Who builds Brain Base, why it exists, and what the project is deliberately trying not to be. Open source, MIT licensed.` (119)
@@ -117,6 +117,7 @@ Six questions are already visible on `/` and should stay there. Future questions
 - **H2s:** What Brain Base is · Why I built it · How it is built · What it is not · Contact
 - **Schema:** `AboutPage` + `Person` (only for facts visible on the page).
 - **Internal links:** `/`, `#features`, `#pricing`, GitHub repo, contact.
+- **Current state:** `src/app/about/page.tsx` is a draft with `[TODO: owner to fill in]` markers, `noindex`, and no sitemap entry. Do not index it until the facts are real.
 
 Draft copy (placeholders must be filled or removed):
 
@@ -180,10 +181,18 @@ Search and answer engines associate the page with entities it names clearly. Men
 | Obsidian | Q&A | Good |
 | Logseq | Not mentioned | Add only in a real comparison |
 | Markdown | Not confirmed | **Verify support before claiming** |
-| Darshan Regmi | JSON-LD Person, footer link | Add `/about` for a first-party bio |
+| Darshan Regmi | JSON-LD Person, footer link | Draft `/about` exists; fill the bio before indexing |
 | "Local-first" / E2E encryption | Absent | **Do not claim** unless the architecture supports it |
 
 ## Owner facts needed
+
+### Trust pages (currently noindex drafts, not in sitemap)
+
+- [ ] `/about`: legal name to show; monitored contact email; support URL; security contact; response-time expectation (only if committed); legal entity/mailing address if required; optional bio, role, location, photo, start date and origin details.
+- [ ] `/privacy`: data-controller legal name; privacy contact email; jurisdiction; database host and region; enabled auth providers; host/CDN log retention; retention/deletion process including backups; user-rights process; international-transfer safeguards; effective date; confirmation on cookies and analytics.
+- [ ] `/terms`: operator legal name and public URL; governing law and venue; eligibility/minimum age; acceptable-use rules and limits; content hosting/processing permission; availability commitment; warranty/liability clauses; termination and data handling; contact; effective date; qualified legal review.
+
+### Content and product
 
 - [ ] Real name/role/location/photo for `/about` (all optional except name).
 - [ ] Origin story details and real start date.
@@ -201,6 +210,7 @@ Search and answer engines associate the page with entities it names clearly. Men
 - One H1; title ≤ 62 chars; description 70–170 chars; self-canonical.
 - Direct answer in the first paragraph; no invented proof.
 - At least one internal link from `/` or the footer; descriptive anchor text.
+- Remove the noindex rule if the page was a draft.
 - Added to `sitemap.ts` only if public and indexable.
 - `pnpm seo:check` passes after deploy.
 - Owner has read it and confirmed every factual claim.
