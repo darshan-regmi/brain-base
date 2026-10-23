@@ -9,10 +9,12 @@ export function TrustPage({
   title,
   intro,
   children,
+  showDraftNotice = true,
 }: {
   title: string;
   intro: string;
   children: React.ReactNode;
+  showDraftNotice?: boolean;
 }) {
   return (
     <div className="min-h-screen bg-canvas text-ink">
@@ -29,18 +31,20 @@ export function TrustPage({
       </header>
 
       <main className="mx-auto max-w-3xl px-6 py-12 sm:py-16">
-        <div
-          role="note"
-          className="mb-8 rounded-md border border-[#e5e3df] bg-[#fef7d6] px-4 py-3 text-sm leading-6 text-[#37352f]"
-        >
-          <strong className="font-semibold">Draft placeholder.</strong> This
-          page is noindexed and excluded from the sitemap. Replace every{" "}
-          <code className="rounded bg-white/70 px-1 py-0.5 text-[13px]">
-            [TODO: owner to fill in]
-          </code>{" "}
-          before publishing, then remove the noindex rule and add the page to
-          the sitemap.
-        </div>
+        {showDraftNotice && (
+          <div
+            role="note"
+            className="mb-8 rounded-md border border-[#e5e3df] bg-[#fef7d6] px-4 py-3 text-sm leading-6 text-[#37352f]"
+          >
+            <strong className="font-semibold">Draft placeholder.</strong> This
+            page is noindexed and excluded from the sitemap. Replace every{" "}
+            <code className="rounded bg-white/70 px-1 py-0.5 text-[13px]">
+              [TODO: owner to fill in]
+            </code>{" "}
+            before publishing, then remove the noindex rule, remove this notice
+            and add the page to the sitemap.
+          </div>
+        )}
 
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
           {title}
