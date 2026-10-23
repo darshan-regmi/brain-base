@@ -223,8 +223,8 @@ function Hero({
         >
           Brain Base is a free, open-source second brain app that combines
           notes, a focus timer, daily logs, a learning tracker and spaced
-          repetition in one calm workspace. It is MIT licensed and
-          self-hostable, so your notes stay on your own machine.
+          repetition in one calm workspace. It is MIT licensed, so you can
+          self-host it and keep your notes in your own database.
         </motion.p>
 
         {/* CTA row — button-primary + button-secondary, both rounded.md (8px) */}

@@ -60,7 +60,7 @@ Status reflects the repository after this branch. "Live" notes the production de
 | Structured data describes visible content | FAIL | PASS | Removed `softwareVersion: "1.0.0"` (package is 0.1.0) and `operatingSystem: "Web, iOS, Android"` (web app). JSON-LD now: Organization, Person, WebSite, WebPage, SoftwareApplication, with `offers` $0, MIT license, repo URL, feature list. Properly escaped. |
 | Review / rating markup | N/A | N/A | None exists and none was added. No real reviews. |
 | FAQPage / HowTo markup | N/A | N/A | Deliberately not added: FAQ rich results ended 2026-05-07; HowTo ended 2023. The six Q&As are plain visible content. |
-| Content answers the primary query | FAIL | PASS (partial) | Hero subtitle is now a 41-word answer block; "Common questions" adds six visible Q&As. Still one page, so long-tail coverage is limited. |
+| Content answers the primary query | FAIL | PASS (partial) | Hero subtitle is now a 44-word answer block; "Common questions" adds six visible Q&As. Still one page, so long-tail coverage is limited. |
 | Internal links | FAIL | PASS | Navbar, footer and CTAs point at real sections/routes; author link uses `rel="me"`. |
 | Trust signals | FAIL | PARTIAL | Footer's MIT link was a 404 (no LICENSE file); added MIT LICENSE and an author GitHub link. Still missing About/bio, privacy, terms, verified contact. |
 | AI crawler access | PASS (local) | PASS (local) | `seo:check` requests `/` as OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User: all 200 with correct HTML. Production and CDN/WAF: UNVERIFIED. |
