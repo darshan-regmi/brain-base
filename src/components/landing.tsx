@@ -1117,8 +1117,10 @@ function Footer() {
       title: "About",
       links: [
         { label: "Why Brain Base", href: "#why" },
-        { label: "Built in public", href: "https://github.com/darshan-regmi/brain-base" },
-        { label: "Contact", href: "mailto:hello@brainbase.dev" },
+        { label: "About the project", href: "/about" },
+        { label: "Privacy", href: "/privacy" },
+        { label: "Terms", href: "/terms" },
+        { label: "Contact", href: "/about#contact" },
       ],
     },
   ];
