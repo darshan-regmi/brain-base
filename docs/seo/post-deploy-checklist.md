@@ -18,7 +18,7 @@ curl -sS https://brain-base.darshanregmi.com.np/sitemap.xml
 
 - [ ] Both return `200`, not an HTML 404 page.
 - [ ] `robots.txt` allows `*`, disallows the private prefixes, and has a `Sitemap:` line.
-- [ ] `sitemap.xml` contains the homepage URL and **does not** contain `/about`, `/privacy` or `/terms` while they are placeholders.
+- [ ] `sitemap.xml` contains the homepage URL and **does not** contain `/about`, `/privacy` or `/terms` while they are noindexed for review.
 
 ## 2. View source on the homepage
 
@@ -47,7 +47,7 @@ curl -sS https://brain-base.darshanregmi.com.np/sign-in | grep -o '<meta name="r
 - [ ] Auth pages return `200` with `<meta name="robots" content="noindex, follow">`.
 - [ ] `/dashboard` and `/notes` return `307` with `location: /sign-in`.
 - [ ] No private note content appears in any public response.
-- [ ] `/about`, `/privacy`, `/terms` return `200` with `noindex` while they are drafts.
+- [ ] `/about`, `/privacy`, `/terms` return `200` with `noindex` while they await review.
 
 ## 4. Run the SEO check against live
 
@@ -98,15 +98,15 @@ If it fails, fix the URL/origin or the deployment before continuing. The check i
 
 ## 7. When the trust pages are ready
 
-The pages `/about`, `/privacy` and `/terms` are currently drafts with `[TODO: owner to fill in]` markers and `noindex`. To publish:
+The pages `/about`, `/privacy` and `/terms` now have the owner facts filled in. They are still `noindex` and excluded from the sitemap. To publish:
 
-1. Replace every TODO with real, approved facts.
+1. Review the facts and have the Privacy Policy and Terms reviewed by someone qualified in Nepal.
 2. Remove `noIndexMetadata(...)` from that page's `metadata` and use normal metadata.
 3. Pass `showDraftNotice={false}` to that page's `TrustPage` (or remove the notice).
 4. Add the URL to `src/app/sitemap.ts`.
 5. Re-run `pnpm seo:check <url>`, then request indexing for the new page.
 
-Do not remove noindex while any TODO remains.
+Do not remove noindex until the review is complete.
 
 ## Record the run
 

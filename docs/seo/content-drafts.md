@@ -61,9 +61,9 @@ Four clusters, one owning page each. Do not spin up a URL per question.
 ### Cluster E — Project and author trust
 
 - **Intent:** branded ("Brain Base Darshan Regmi", "who made Brain Base").
-- **Owning URL today:** `/about` exists as a draft, but is noindex and not in the sitemap.
-- **Recommended next step:** fill the owner facts in `/about` and publish it; it is the highest-value trust addition after deploy.
-- **Unique material needed:** real bio, origin story, project principles, contact.
+- **Owning URL today:** `/about` (owner facts filled in; noindex pending review).
+- **Recommended next step:** review the facts, then publish after the Privacy Policy and Terms review; it is the highest-value trust addition after deploy.
+- **Unique material needed:** maintainer identity, project start, hosting details, and contact.
 
 ## Home page metadata options
 
@@ -100,40 +100,26 @@ Six questions are already visible on `/` and should stay there. Future questions
 | Does it work offline? | `/` `#questions` | Live |
 | What do I need to run it myself? | `/self-hosting` | Not written |
 | How does the spaced-repetition scheduling work? | `/` feature section or guide | Verify SM-2 implementation before expanding |
-| Can I export or delete my data? | Privacy/FAQ | **Verify the feature exists first** |
+| Can I export or delete my data? | Privacy/FAQ | Verified: items can be deleted in-app; account deletion/export by request |
 | Is there a mobile app? | `/` `#questions` | Answer as PWA; do not imply native apps |
 | Is it local-first or end-to-end encrypted? | Do not answer yet | **Not verified — do not claim** |
 | Does it support Markdown? | `/` feature detail | **Verify before claiming** |
-| Can a team use it? | `/` `#questions` | Current copy says single-user; confirm |
+| Can a team use it? | `/` `#questions` | Confirmed single-user; no sharing or team features |
 | Is it actively maintained? | `/about` or README | Use real release/commit facts, never a fake "updated" date |
 
 ## Page briefs
 
-### 1. `/about` (scaffolded, noindex draft)
+### 1. `/about` (owner facts filled, noindex pending review)
 
-- **Title options:** `About Brain Base and its author | Brain Base` (44) / `Why I built Brain Base — about the project` (42)
-- **Description:** `Who builds Brain Base, why it exists, and what the project is deliberately trying not to be. Open source, MIT licensed.` (119)
-- **H1:** `Why I built Brain Base`
-- **H2s:** What Brain Base is · Why I built it · How it is built · What it is not · Contact
+- **Title:** `About Brain Base` (16)
+- **Description:** `About Brain Base: the open-source second brain app, who maintains it, how it is built, and how to get support.` (112)
+- **H1:** `About Brain Base`
+- **H2s:** What Brain Base is · Why it exists · Who builds it · How it is built · What it is not · Contact
 - **Schema:** `AboutPage` + `Person` (only for facts visible on the page).
 - **Internal links:** `/`, `#features`, `#pricing`, GitHub repo, contact.
-- **Current state:** `src/app/about/page.tsx` is a draft with `[TODO: owner to fill in]` markers, `noindex`, and no sitemap entry. Do not index it until the facts are real.
-
-Draft copy (placeholders must be filled or removed):
-
-> Brain Base is an open-source second brain app I built because I was tired of juggling five different tools just to stay on top of my day. It keeps notes, a focus timer, daily logs and a learning tracker in one quiet workspace.
->
-> I am [REAL NAME], a [REAL ROLE] based in [PLACE, OPTIONAL]. [ONE OR TWO SENTENCES OF VERIFIABLE BACKGROUND — what you work on, what you have built, or why this problem is yours. No invented credentials.]
->
-> I started Brain Base in [REAL MONTH/YEAR]. [ONE OR TWO SENTENCES ON THE ORIGIN — what the first version did, what broke, what changed. Only facts you can stand behind.]
->
-> It is built with Next.js, React, Prisma and Postgres, and it is MIT licensed. You can run it yourself, read the code, or use the hosted version at [CURRENT URL]. There is no paid tier and no telemetry.
->
-> **What it is not:** a team workspace, a Notion replacement for databases and pages, or a native mobile app. It is a single-user tool for capture, focus, logs and review. [VERIFY "single-user" AGAINST THE AUTH MODEL BEFORE PUBLISHING.]
->
-> Contact: [MONITORED EMAIL OR GITHUB ISSUES LINK].
-
-Do not add a photo, location, employer or biography unless it is real and the owner approves it.
+- **Current state:** `src/app/about/page.tsx` has the owner facts filled in, `noindex`, and no sitemap entry. Do not index it until the owner review is complete.
+- **Confirmed facts:** Darshan Regmi, individual, Nepal; project started early 2026; public bio links to GitHub; Neon Postgres in AWS US East 1 (N. Virginia); Vercel hosting; email/password, GitHub and Google sign-in; single-user, no sharing.
+- **Still needed:** owner review of the page and contact wording; publish only after the legal pages are reviewed.
 
 ### 2. `/self-hosting` (after README is accurate)
 
@@ -181,26 +167,27 @@ Search and answer engines associate the page with entities it names clearly. Men
 | Obsidian | Q&A | Good |
 | Logseq | Not mentioned | Add only in a real comparison |
 | Markdown | Not confirmed | **Verify support before claiming** |
-| Darshan Regmi | JSON-LD Person, footer link | Draft `/about` exists; fill the bio before indexing |
+| Darshan Regmi | JSON-LD Person, footer link, `/about` | `/about` facts filled; noindex pending review |
 | "Local-first" / E2E encryption | Absent | **Do not claim** unless the architecture supports it |
 
 ## Owner facts needed
 
-### Trust pages (currently noindex drafts, not in sitemap)
+### Trust pages (owner facts supplied; noindex pending review)
 
-- [ ] `/about`: legal name to show; monitored contact email; support URL; security contact; response-time expectation (only if committed); legal entity/mailing address if required; optional bio, role, location, photo, start date and origin details.
-- [ ] `/privacy`: data-controller legal name; privacy contact email; jurisdiction; database host and region; enabled auth providers; host/CDN log retention; retention/deletion process including backups; user-rights process; international-transfer safeguards; effective date; confirmation on cookies and analytics.
-- [ ] `/terms`: operator legal name and public URL; governing law and venue; eligibility/minimum age; acceptable-use rules and limits; content hosting/processing permission; availability commitment; warranty/liability clauses; termination and data handling; contact; effective date; qualified legal review.
+- [x] `/about`: Darshan Regmi, individual, Nepal; early 2026 start; GitHub profile instead of a bio; GitHub Issues support; privacy/security by requesting a private channel on GitHub (the profile has no public email); best-effort response; no public mailing address; Neon Postgres in AWS US East 1 (N. Virginia); Vercel hosting; single-user confirmed.
+- [x] `/privacy`: Darshan Regmi, individual, Nepal; GitHub Issues and a private channel requested on GitHub; Neon/AWS US East 1; Vercel standard logs; email/password, GitHub and Google auth; delete-in-app and account action by request; Neon default backups; no analytics or advertising cookies; effective when published.
+- [x] `/terms`: Darshan Regmi, individual, Nepal; custom-domain URL; no stated minimum age; conservative acceptable-use list; limited content licence; as-is availability; Nepal law; termination for abuse; GitHub Issues/public and private channel on request; effective when published.
+- [ ] Qualified legal review of the Privacy Policy and Terms before removing `noindex`.
 
 ### Content and product
 
-- [ ] Real name/role/location/photo for `/about` (all optional except name).
-- [ ] Origin story details and real start date.
-- [ ] Whether hosted sign-up is open to the public, and the canonical URL.
-- [ ] Monitored contact channel (email or GitHub Issues/Discussions).
-- [ ] Confirmed database support: Postgres only, or SQLite for local dev.
-- [ ] Whether export/import exists.
-- [ ] Whether analytics will be added (the site currently says none).
+- [x] Name for `/about`: Darshan Regmi. No public role, location, photo or personal bio; the page links to GitHub instead.
+- [x] Project start: early 2026. No further origin-story details supplied.
+- [x] Canonical URL: `https://brain-base.darshanregmi.com.np`. Hosted sign-up is public.
+- [x] Contact channel: GitHub Issues for public support; ask for a private channel there. The GitHub profile lists no public email.
+- [x] Database support: Postgres only in `prisma/schema.prisma`; README still needs fixing.
+- [x] Export/import: full export is not implemented; individual items can be deleted in-app; account deletion/export is by request.
+- [x] Analytics: none. The landing page's "no telemetry, no analytics" claim is still accurate.
 - [ ] AI training policy (currently allowed).
 - [ ] Any real usage numbers, testimonials or launch coverage — only if verifiable and permitted.
 - [ ] Competitor facts for a comparison page, checked on the publication date.

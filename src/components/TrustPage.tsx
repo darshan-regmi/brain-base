@@ -3,7 +3,8 @@ import { Wordmark } from "./ui";
 
 /**
  * Shell for the draft trust pages. Every page using this is noindexed and
- * excluded from the sitemap until the owner replaces the TODO markers.
+ * excluded from the sitemap until the owner and, for the legal pages, a
+ * qualified reviewer sign off.
  */
 export function TrustPage({
   title,
@@ -36,13 +37,11 @@ export function TrustPage({
             role="note"
             className="mb-8 rounded-md border border-[#e5e3df] bg-[#fef7d6] px-4 py-3 text-sm leading-6 text-[#37352f]"
           >
-            <strong className="font-semibold">Draft placeholder.</strong> This
-            page is noindexed and excluded from the sitemap. Replace every{" "}
-            <code className="rounded bg-white/70 px-1 py-0.5 text-[13px]">
-              [TODO: owner to fill in]
-            </code>{" "}
-            before publishing, then remove the noindex rule, remove this notice
-            and add the page to the sitemap.
+            <strong className="font-semibold">Draft for review.</strong> This
+            page is noindexed and excluded from the sitemap. The owner facts are
+            filled in; the privacy policy and terms still need qualified legal
+            review. Remove the noindex rule, remove this notice and add the page
+            to the sitemap only after that review.
           </div>
         )}
 

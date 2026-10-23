@@ -10,65 +10,47 @@ Short version for after a deploy: `docs/seo/post-deploy-checklist.md`.
 
 ## P0 — do before measuring anything
 
-- [ ] **Deploy this branch to production.** The live custom domain is still the old deployment as of 2026-10-23: `/robots.txt` and `/sitemap.xml` return the 404 page; the HTML has the old title, `og:url=https://brainbase.pages.dev`, no canonical, and an `opacity:0` H1.
-  - After deploy, confirm both files return 200 with real content; page source contains `<main>`, one visible H1, canonical `https://brain-base.darshanregmi.com.np/`, and `og:url` on the same origin. The stale live `/sign-in` also lacks its noindex meta; the local build emits it.
-  - Run: `pnpm seo:check https://brain-base.darshanregmi.com.np` (or set `SEO_BASE_URL`).
-  - Then run the five-minute `docs/seo/post-deploy-checklist.md`.
+- [x] **Deploy this branch to production.** Deployed on 2026-10-23 at `9e50fad`; the live custom domain now serves the new build.
+  - Verified: `/robots.txt` and `/sitemap.xml` return 200; page source has `<main>`, one visible H1, canonical `https://brain-base.darshanregmi.com.np/`, and `og:url` on the same origin; `/sign-in` emits its noindex meta.
+  - `pnpm seo:check https://brain-base.darshanregmi.com.np` passes: six AI bots 200, zero failures.
+  - Continue with the five-minute `docs/seo/post-deploy-checklist.md`.
 - [ ] **Set `NEXT_PUBLIC_SITE_URL` in the deployment environment** to `https://brain-base.darshanregmi.com.np` (no trailing slash). The fallback in `src/lib/site.ts` now matches this origin, but the env var is the explicit source of truth.
 - [ ] **Treat the custom domain as canonical.** If you later change domains, add 301/308 redirects from the old host and update `NEXT_PUBLIC_SITE_URL`, README, `sameAs`, canonicals and sitemap in the same change.
 - [ ] **Google Search Console:** verify `https://brain-base.darshanregmi.com.np/` or the domain property, submit `/sitemap.xml`, check Security & Manual Actions, and keep the page eligible for Search generative AI features.
 - [ ] **Bing Webmaster Tools:** verify, submit the sitemap, enable IndexNow if desired.
 - [ ] **Check the CDN/WAF.** In Vercel Firewall/Attack Challenge Mode, make sure Googlebot, Bingbot and the AI agents below are not challenged or blocked. Test with real user agents and record status codes:
   `OAI-SearchBot/1.4`, `ChatGPT-User/1.0`, `Claude-SearchBot/1.0`, `Claude-User/1.0`, `PerplexityBot/1.0`, `Perplexity-User/1.0`.
-- [ ] **Choose a monitored contact channel.** The footer now points to `/about#contact`, which is a placeholder. Do not publish an email or form until it is real and monitored.
+- [x] **Choose a monitored contact channel.** Public support and bug reports point to GitHub Issues. Privacy and security reports also start on GitHub: open an issue and ask for a private channel without posting sensitive details. The GitHub profile has no public email (checked via the GitHub API). The footer links to `/about#contact`. No email or form is published.
 
-## P0 — finish the trust pages
+## P0 — trust pages: facts supplied, awaiting review
 
-`/about`, `/privacy` and `/terms` exist as drafts. They are `noindex, follow` and intentionally absent from the sitemap. Every unresolved fact is marked `[TODO: owner to fill in]`.
+`/about`, `/privacy` and `/terms` are filled in. They remain `noindex, follow` and excluded from the sitemap until the owner and, for the legal pages, a qualified reviewer sign off.
 
-- [ ] **Supply the About facts.** Required before publishing:
-  - legal name you want shown publicly;
-  - monitored contact email;
-  - support URL (GitHub Issues or Discussions);
-  - private security-report contact;
-  - response-time expectation, only if you can commit to one;
-  - legal entity and mailing address, if required in your jurisdiction.
+- [x] **Owner facts supplied.** Confirmed:
+  - operator: Darshan Regmi, individual, Nepal;
+  - public support: GitHub Issues;
+  - private privacy/security contact: request a private channel via GitHub Issues (the GitHub profile lists no public email);
+  - response time: best effort, no guarantee;
+  - project start: early 2026;
+  - public bio: link to GitHub only;
+  - database: Neon, AWS US East 1 (N. Virginia);
+  - hosting: Vercel, standard request logs;
+  - auth: email/password, GitHub and Google;
+  - deletion/export: individual items in-app; account action by request;
+  - backups: Neon default retention;
+  - minimum age: none stated;
+  - content licence: limited licence to host, process, back up and display;
+  - liability/availability: conservative as-is terms under Nepal law;
+  - effective date: set on publication.
 
-  Optional but useful: short first-person bio, role, location, photo, project start date, origin details, confirmed single-user description, production database host/region.
-
-- [ ] **Supply the Privacy facts.** Required before publishing:
-  - legal entity / data controller name;
-  - monitored privacy contact email;
-  - jurisdiction;
-  - database host and region;
-  - which auth providers are enabled on the hosted instance (GitHub, Google, credentials);
-  - whether the host/CDN keeps access logs and for how long;
-  - retention and deletion process, including backups;
-  - user-rights process for your jurisdiction;
-  - international-transfer safeguards, if applicable;
-  - effective date;
-  - confirmation that there are no advertising/third-party cookies and no analytics (currently true in code).
-
-- [ ] **Supply the Terms facts.** Required before publishing:
-  - operator legal name and public URL;
-  - governing-law jurisdiction and venue, if applicable;
-  - eligibility / minimum age;
-  - acceptable-use rules and any storage/rate limits;
-  - the permission the operator needs to host, process, back up and display user content;
-  - availability commitment (or explicit "as-is");
-  - warranty disclaimer and liability limitation, reviewed by a qualified person;
-  - termination rules and what happens to data;
-  - contact and effective date.
-
-- [ ] **Publish the trust pages only after the facts are real:**
-  1. replace every `[TODO: owner to fill in]`;
-  2. remove `noIndexMetadata(...)` from that page's `metadata`;
-  3. pass `showDraftNotice={false}` to that page's `TrustPage` (or remove the notice);
-  4. add the URL to `src/app/sitemap.ts`;
-  5. run `pnpm seo:check https://brain-base.darshanregmi.com.np`;
-  6. request indexing for the new page.
-
-- [ ] **Have the privacy policy and terms reviewed** by someone qualified in your jurisdiction. They are templates, not legal advice.
+- [ ] **Review the About page.** Check the project start date, maintainer link, hosting details and contact wording.
+- [ ] **Have the Privacy Policy and Terms reviewed** by someone qualified in Nepal. They are templates, not legal advice.
+- [ ] **Publish only after review:**
+  1. remove `noIndexMetadata(...)` from that page's `metadata`;
+  2. pass `showDraftNotice={false}` to that page's `TrustPage` (or remove the notice);
+  3. add the URL to `src/app/sitemap.ts`;
+  4. run `pnpm seo:check https://brain-base.darshanregmi.com.np`;
+  5. request indexing for the new page.
 
 ## P1 — trust and first-party proof
 
@@ -95,14 +77,13 @@ Short version for after a deploy: `docs/seo/post-deploy-checklist.md`.
 
 ## UNVERIFIED (as of 2026-10-23)
 
-- **The live custom domain is still the stale build.** Verified: `/robots.txt` and `/sitemap.xml` 404; old title/`og:url`; `opacity:0` H1. Re-check after deploy.
 - **Lighthouse / PageSpeed / Core Web Vitals:** not run. No Chrome/Chromium was available in this environment.
 - **Browser accessibility audit:** not run (no axe or browser).
-- **Rich Results Test / Schema.org validator:** not run against the new build; the live page is stale.
-- **Production WAF/CDN behaviour:** not tested. Local AI-bot requests pass; production may differ.
+- **Rich Results Test / Schema.org validator:** not run against the deployed build.
+- **Production WAF/CDN behaviour:** not tested beyond the six AI user agents in `pnpm seo:check`; Vercel's dashboard controls were not inspected.
 - **Google Search Console / Bing Webmaster Tools:** not connected or inspected.
-- **Contact email delivery:** not tested. The old `hello@brainbase.dev` mailto was removed from the footer; `/about#contact` is a placeholder.
-- **Trust pages:** drafts only. Not legally reviewed; not indexed; not in the sitemap.
+- **Contact delivery:** there is no published email. Support goes through GitHub Issues; privacy/security go through a private channel requested on GitHub. The GitHub profile's email is null, and the private-channel flow was not tested.
+- **Trust pages:** owner facts are filled in, but they are not legally reviewed, not indexed, and not in the sitemap.
 - **AI training policy:** currently allowed by default; owner decision, not verified against a legal or business requirement.
 - **Analytics/AI referrals:** no analytics code exists, so no referral data is available yet.
 

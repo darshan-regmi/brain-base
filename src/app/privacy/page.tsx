@@ -1,27 +1,46 @@
 import type { Metadata } from "next";
 import { TrustPage, TrustSection } from "@/components/TrustPage";
 import { noIndexMetadata } from "@/lib/app-metadata";
+import { AUTHOR_NAME, AUTHOR_URL, REPO_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   ...noIndexMetadata("Privacy policy"),
   description:
-    "Draft privacy policy for Brain Base. Placeholder copy awaiting owner and legal review.",
+    "Privacy policy for the hosted Brain Base service, covering what is stored, why, where, and how to request deletion.",
 };
 
 export default function PrivacyPage() {
   return (
     <TrustPage
       title="Privacy policy"
-      intro="This is a draft privacy policy for Brain Base. It is not legal advice, and it is not ready to publish. The owner and a qualified reviewer must confirm every statement below."
+      intro="This policy describes how the hosted Brain Base service handles personal data. It is under review before publication and is not legal advice."
     >
       <TrustSection title="Who is responsible">
         <p>
-          Data controller: [TODO: owner to fill in — legal name or entity]
+          Data controller: {AUTHOR_NAME}, an individual based in Nepal.
         </p>
         <p>
-          Contact: [TODO: owner to fill in — monitored privacy contact email]
+          Public support:{" "}
+          <a
+            href={`${REPO_URL}/issues`}
+            className="underline decoration-[#c8c4be] underline-offset-2 hover:text-ink"
+            rel="noopener noreferrer"
+          >
+            GitHub Issues
+          </a>
+          . For privacy requests, open a GitHub issue and ask for a private
+          channel; do not post personal data in the issue. You can also start
+          from the maintainer&apos;s{" "}
+          <a
+            href={AUTHOR_URL}
+            className="underline decoration-[#c8c4be] underline-offset-2 hover:text-ink"
+            rel="me noopener noreferrer"
+          >
+            GitHub profile
+          </a>
+          .
         </p>
-        <p>Jurisdiction: [TODO: owner to fill in — country/state]</p>
+        <p>Jurisdiction: Nepal.</p>
         <p>
           If you self-host Brain Base, you are the operator of your instance and
           are responsible for its privacy practices.
@@ -50,9 +69,8 @@ export default function PrivacyPage() {
           </li>
         </ul>
         <p>
-          [TODO: owner to fill in — confirm this list matches the deployed
-          instance and add anything else you collect, including server or
-          hosting logs.]
+          Vercel, the hosting provider, processes standard request logs such as
+          IP address, user agent, and request time for security and operations.
         </p>
       </TrustSection>
 
@@ -60,30 +78,28 @@ export default function PrivacyPage() {
         <p>
           The data is used to provide the app: authenticate you, save and
           display your notes and logs, run the focus timer and review schedule,
-          store uploaded files, and keep your session active.
+          store uploaded files, and keep your session active. Request logs are
+          used for security, abuse prevention, and troubleshooting.
         </p>
         <p>
-          [TODO: owner to fill in — add any other purpose, such as support,
-          security, or aggregate usage reporting. Do not claim a purpose you do
-          not actually have.]
+          The hosted instance does not use your content for advertising, does
+          not sell it, and does not run third-party analytics or telemetry.
         </p>
       </TrustSection>
 
       <TrustSection title="Where it is stored">
         <p>
           Data is stored in the Postgres database configured by the operator of
-          the instance. On the public hosted instance, the database host and
-          region are: [TODO: owner to fill in — provider and region].
+          the instance. On the public hosted instance, the database is hosted by
+          Neon in AWS US East 1 (N. Virginia), and the app runs on Vercel.
         </p>
         <p>
-          Authentication can use email/password, GitHub, or Google. The
-          providers enabled on the hosted instance are: [TODO: owner to fill in
-          — list only the providers actually enabled].
+          Authentication can use email/password, GitHub, or Google. All three
+          are enabled on the hosted instance.
         </p>
         <p>
-          At the time of writing, the codebase contains no third-party analytics
-          or telemetry scripts. [TODO: owner to fill in — confirm this is still
-          true for the deployed instance and disclose any hosting/CDN logs.]
+          The codebase contains no third-party analytics or telemetry scripts.
+          Vercel processes the standard request logs described above.
         </p>
       </TrustSection>
 
@@ -93,42 +109,68 @@ export default function PrivacyPage() {
           preference is stored locally in your browser.
         </p>
         <p>
-          [TODO: owner to fill in — confirm there are no advertising or
-          third-party cookies, and list any added later.]
+          The hosted instance does not use advertising cookies or third-party
+          analytics cookies.
         </p>
       </TrustSection>
 
       <TrustSection title="Retention and deletion">
         <p>
-          [TODO: owner to fill in — how long account data and content are kept,
-          what happens when an account is deleted, whether backups retain data,
-          and how someone can request deletion.]
+          Account data and content are kept until you delete them or request
+          account deletion. Notes, learning resources, and review cards can be
+          deleted individually in the app. Full account deletion and data export
+          are handled by request through GitHub; ask for a private channel without
+          posting personal data.
+        </p>
+        <p>
+          Neon provides the database&apos;s default backup retention. Deleted
+          data may remain in those backups until they expire. The operator may
+          need to verify your identity before acting on a deletion or export
+          request.
         </p>
       </TrustSection>
 
       <TrustSection title="Your rights">
         <p>
-          [TODO: owner to fill in — the rights available in your jurisdiction
-          (for example access, correction, deletion, portability, objection),
-          how to exercise them, and how identity is verified.]
+          You can request access to, correction of, export of, or deletion of
+          your personal data through GitHub, asking for a private channel. You may
+          also have additional rights under the law that applies to you. Requests
+          are handled on a best-effort basis.
         </p>
         <p>
-          [TODO: owner to fill in — international transfer safeguards, if
-          applicable.]
+          The production database is in the United States. If you use the
+          service from another country, your data is transferred to and
+          processed there. Contact the operator for details about the safeguards
+          that apply.
         </p>
       </TrustSection>
 
       <TrustSection title="Changes and contact">
         <p>
-          Effective date: [TODO: owner to fill in — date the final policy takes
-          effect].
+          Effective when published. Last updated 23 October 2026.
         </p>
         <p>
-          [TODO: owner to fill in — how material changes will be announced.]
+          Material changes will be posted on this page and noted in the GitHub
+          repository. There is no mailing list, so check this page for updates.
         </p>
         <p>
-          Privacy contact: [TODO: owner to fill in — monitored email or support
-          URL].
+          Privacy contact: ask for a private channel on the maintainer&apos;s{" "}
+          <a
+            href={AUTHOR_URL}
+            className="underline decoration-[#c8c4be] underline-offset-2 hover:text-ink"
+            rel="me noopener noreferrer"
+          >
+            GitHub profile
+          </a>
+          . Public support:{" "}
+          <a
+            href={`${REPO_URL}/issues`}
+            className="underline decoration-[#c8c4be] underline-offset-2 hover:text-ink"
+            rel="noopener noreferrer"
+          >
+            GitHub Issues
+          </a>
+          .
         </p>
       </TrustSection>
     </TrustPage>

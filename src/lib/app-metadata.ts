@@ -14,9 +14,9 @@ import type { Metadata } from "next";
  *  2. Auth screens themselves (`/sign-in`, `/sign-up`, `/forgot-password`),
  *     which are thin, low-value, and unique per visitor.
  *
- *  3. Placeholder trust pages (`/about`, `/privacy`, `/terms`). They contain
- *     unresolved `[TODO: owner to fill in]` facts and must stay out of the
- *     index and the sitemap until those are replaced.
+ *  3. Trust pages (`/about`, `/privacy`, `/terms`). The owner facts are filled
+ *     in, but they stay out of the index and the sitemap until the owner and,
+ *     for the legal pages, a qualified reviewer sign off.
  *
  * `follow` stays true so crawlers keep walking the rest of the site.
  */
