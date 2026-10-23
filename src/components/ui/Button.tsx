@@ -26,6 +26,9 @@ const VARIANT_MAP: Record<Variant, string> = {
     "bg-white text-ink hover:opacity-90 font-medium",
 };
 
+const BASE =
+  "inline-flex items-center justify-center rounded-md cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed leading-none";
+
 export const Button = forwardRef<
   HTMLButtonElement,
   HTMLMotionProps<"button"> & { variant?: Variant; size?: Size }
@@ -39,12 +42,27 @@ export const Button = forwardRef<
       disabled={disabled}
       whileTap={!disabled ? { scale: 0.98 } : undefined}
       transition={{ duration: 0.12, ease: [0.16, 1, 0.3, 1] }}
-      className={cn(
-        "inline-flex items-center justify-center rounded-md cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed leading-none",
-        VARIANT_MAP[variant],
-        SIZE_MAP[size],
-        className,
-      )}
+      className={cn(BASE, VARIANT_MAP[variant], SIZE_MAP[size], className)}
+      {...rest}
+    />
+  );
+});
+
+/** Same look as Button, rendered as a real anchor so links are never nested
+ *  inside a `<button>` (invalid HTML, confusing to screen readers and agents). */
+export const ButtonLink = forwardRef<
+  HTMLAnchorElement,
+  HTMLMotionProps<"a"> & { variant?: Variant; size?: Size }
+>(function ButtonLink(
+  { variant = "primary", size = "md", className, ...rest },
+  ref,
+) {
+  return (
+    <motion.a
+      ref={ref}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.12, ease: [0.16, 1, 0.3, 1] }}
+      className={cn(BASE, VARIANT_MAP[variant], SIZE_MAP[size], className)}
       {...rest}
     />
   );

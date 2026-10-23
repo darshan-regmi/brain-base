@@ -1,5 +1,5 @@
 export { Surface } from "./Surface";
-export { Button, CandleButton, GhostButton } from "./Button";
+export { Button, ButtonLink, CandleButton, GhostButton } from "./Button";
 export { Field } from "./Field";
 export { TagPill } from "./TagPill";
 export { StatCard } from "./StatCard";

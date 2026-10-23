@@ -4,7 +4,7 @@ import "./globals.css";
 import { RegisterSW } from "@/components/app/RegisterSW";
 import { Providers } from "@/components/app/Providers";
 import { ThemeProvider } from "@/components/app/ThemeProvider";
-import { REPO_URL, SITE_NAME, SITE_URL } from "@/lib/site";
+import { REPO_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -20,8 +20,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Brain Base — Your Second Brain",
-  description:
-    "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise. Just clarity.",
+  description: SITE_DESCRIPTION,
   // Resolves relative OG/canonical/icon URLs. Was hard-coded to
   // https://brainbase.pages.dev, which is not the deployed host.
   metadataBase: new URL(SITE_URL),
@@ -45,8 +44,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Brain Base — Your Second Brain",
-    description:
-      "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise.",
+    description: SITE_DESCRIPTION,
     url: "/",
     siteName: SITE_NAME,
     images: [
@@ -63,8 +61,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Brain Base — Your Second Brain",
-    description:
-      "An open-source second brain app — notes, focus timer, daily logs & learning tracker. No subscriptions. No noise.",
+    description: SITE_DESCRIPTION,
     images: ["/og-image.png"],
   },
   robots: {

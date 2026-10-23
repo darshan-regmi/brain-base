@@ -10,12 +10,19 @@
  * the live URL in the README; no trailing slash.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://brain-base-lake.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://brain-base.darshanregmi.com.np"
 ).replace(/\/$/, "");
 
 export const SITE_NAME = "Brain Base";
 
+export const SITE_DESCRIPTION =
+  "Brain Base is an open-source second brain app with notes, wikilinks, a focus timer, daily logs and spaced repetition. Free, MIT licensed, self-hostable.";
+
 export const REPO_URL = "https://github.com/darshan-regmi/brain-base";
+
+/** Real human behind the project. The profile URL is the public GitHub account. */
+export const AUTHOR_NAME = "Darshan Regmi";
+export const AUTHOR_URL = "https://github.com/darshan-regmi";
 
 export function absoluteUrl(path: string): string {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;

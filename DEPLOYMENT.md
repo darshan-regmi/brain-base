@@ -154,17 +154,20 @@ as an additional callback URL on the provider too.
 
 ---
 
-## 7. Update production metadata
+## 7. Set the production origin
 
-`src/app/layout.tsx` hard-codes the OG / metadata base URL. Edit it before
-your first prod deploy:
+Set `NEXT_PUBLIC_SITE_URL` in the deployment environment to the final public
+origin, with no trailing slash:
 
-```diff
-- metadataBase: new URL("https://brainbase.pages.dev"),
-+ metadataBase: new URL("https://your-app.vercel.app"),
+```bash
+NEXT_PUBLIC_SITE_URL=https://brain-base.darshanregmi.com.np
 ```
 
-…and the `openGraph.url` field on the same object. Commit + push.
+It drives `metadataBase`, canonicals, OG URLs, `robots.txt` and the sitemap.
+The fallback in `src/lib/site.ts` matches the current live origin, but setting
+the variable explicitly prevents drift. If you move domains, add a 301/308
+redirect from the old host and update this value, the README and the links in
+the same change.
 
 ---
 

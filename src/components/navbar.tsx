@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { Wordmark, Button } from "./ui";
+import { Wordmark, ButtonLink } from "./ui";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -42,8 +42,8 @@ export default function Navbar() {
   return (
     <>
       <motion.header
-        initial={{ y: -16, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={{ y: -16 }}
+        animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
           "fixed top-3 sm:top-4 left-3 right-3 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 z-50 w-auto sm:w-[min(1180px,calc(100%-2rem))]",
@@ -76,23 +76,17 @@ export default function Navbar() {
 
             <div className="hidden md:flex items-center gap-2">
               {isAuthed ? (
-                <Link href="/dashboard">
-                  <Button variant="primary" size="sm">
-                    Dashboard
-                  </Button>
-                </Link>
+                <ButtonLink href="/dashboard" variant="primary" size="sm">
+                  Dashboard
+                </ButtonLink>
               ) : (
                 <>
-                  <Link href="/sign-in">
-                    <Button variant="ghost" size="sm">
-                      Log in
-                    </Button>
-                  </Link>
-                  <Link href="/sign-up">
-                    <Button variant="primary" size="sm">
-                      Get Brain Base free
-                    </Button>
-                  </Link>
+                  <ButtonLink href="/sign-in" variant="ghost" size="sm">
+                    Log in
+                  </ButtonLink>
+                  <ButtonLink href="/sign-up" variant="primary" size="sm">
+                    Get Brain Base free
+                  </ButtonLink>
                 </>
               )}
             </div>
@@ -213,32 +207,35 @@ export default function Navbar() {
                 transition={{ delay: 0.28, duration: 0.3 }}
               >
                 {isAuthed ? (
-                  <Link
+                  <ButtonLink
                     href="/dashboard"
                     onClick={() => setMobileOpen(false)}
+                    variant="primary"
+                    size="md"
+                    className="w-full"
                   >
-                    <Button variant="primary" size="md" className="w-full">
-                      Open dashboard
-                    </Button>
-                  </Link>
+                    Open dashboard
+                  </ButtonLink>
                 ) : (
                   <>
-                    <Link
+                    <ButtonLink
                       href="/sign-up"
                       onClick={() => setMobileOpen(false)}
+                      variant="primary"
+                      size="md"
+                      className="w-full"
                     >
-                      <Button variant="primary" size="md" className="w-full">
-                        Get Brain Base free
-                      </Button>
-                    </Link>
-                    <Link
+                      Get Brain Base free
+                    </ButtonLink>
+                    <ButtonLink
                       href="/sign-in"
                       onClick={() => setMobileOpen(false)}
+                      variant="secondary"
+                      size="md"
+                      className="w-full"
                     >
-                      <Button variant="secondary" size="md" className="w-full">
-                        Log in
-                      </Button>
-                    </Link>
+                      Log in
+                    </ButtonLink>
                   </>
                 )}
                 <p className="text-[12px] text-[#a4a097] text-center pt-2">
