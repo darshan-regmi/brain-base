@@ -5,7 +5,7 @@
 An open-source, self-hostable second brain — notes, focus timer, daily logs &
 learning tracker, all in one place. No subscriptions. No noise.
 
-**🌐 [brain-base-lake.vercel.app](https://brain-base-lake.vercel.app/) — IS NOW LIVE**
+**🌐 [brain-base.darshanregmi.com.np](https://brain-base.darshanregmi.com.np/) — IS NOW LIVE**
 
 ---
 
@@ -165,10 +165,20 @@ Open [http://localhost:3000](http://localhost:3000). Sign up at
 | `pnpm build`     | Build for production (runs `prisma generate` first) |
 | `pnpm start`     | Start the production server                         |
 | `pnpm lint`      | Run ESLint                                          |
-| `pnpm seo:check` | Check robots, sitemap, metadata, JSON-LD and AI-crawler access (needs a running server) |
+| `pnpm seo:check [url]` | Check robots, sitemap, metadata, JSON-LD and AI-crawler access (needs a running server) |
 | `pnpm db:push`   | Sync Prisma schema → database (no migrations)       |
 | `pnpm db:studio` | Open Prisma Studio                                  |
 | `pnpm db:reset`  | Wipe and recreate the database                      |
+
+The SEO check defaults to `http://localhost:3000`. Pass a URL to check a preview
+or the live site, or set `SEO_BASE_URL`:
+
+```bash
+pnpm seo:check https://brain-base.darshanregmi.com.np
+SEO_BASE_URL=https://brain-base.darshanregmi.com.np pnpm seo:check
+```
+
+It exits non-zero on a failed check, so it is safe to use in CI.
 
 ---
 

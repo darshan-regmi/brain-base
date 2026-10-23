@@ -1,6 +1,16 @@
-// Usage: node scripts/seo-check.mjs http://localhost:3000
-// Run against a production build (`pnpm build && pnpm start`).
-const base = (process.argv[2] ?? "http://localhost:3000").replace(/\/$/, "");
+// Usage:
+//   pnpm seo:check
+//   pnpm seo:check https://preview.example.com
+//   SEO_BASE_URL=https://example.com pnpm seo:check
+// Run against a production build (`pnpm build && pnpm start`) or a deployed URL.
+const rawBase =
+  process.argv[2] ?? process.env.SEO_BASE_URL ?? "http://localhost:3000";
+const base = rawBase.replace(/\/$/, "");
+if (!/^https?:\/\//.test(base)) {
+  console.error(`Invalid base URL: ${rawBase}`);
+  process.exit(1);
+}
+console.log(`checking ${base}`);
 
 const decode = (s) =>
   s

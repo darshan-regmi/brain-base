@@ -10,7 +10,7 @@
  * the live URL in the README; no trailing slash.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://brain-base-lake.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://brain-base.darshanregmi.com.np"
 ).replace(/\/$/, "");
 
 export const SITE_NAME = "Brain Base";
