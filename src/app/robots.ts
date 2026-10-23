@@ -8,6 +8,11 @@ import { PRIVATE_ROUTES, SITE_URL } from "@/lib/site";
  *
  * Disallow alone does NOT remove an already-indexed URL — the matching
  * `robots: { index: false }` on those routes does that part.
+ *
+ * AI crawlers: no named groups are declared, so search, user-triggered and
+ * training bots all follow the `*` rule and training is allowed on purpose.
+ * If a named group is added later, repeat PRIVATE_ROUTES inside it — a bot
+ * with its own group ignores `*`.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
