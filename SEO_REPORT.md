@@ -1,7 +1,7 @@
 # SEO & GEO report — Brain Base
 
 **Date:** 2026-10-23
-**Branch:** `main` (the `seo-geo-pass` work is merged; all branches are synced at `f50bb55`, the trust-page fill)
+**Branch:** `main` (the `seo-geo-pass` work is merged; all branches are synced, including the trust-page fill in `729f11a`)
 **Live origin:** `https://brain-base.darshanregmi.com.np` (new build deployed and verified)
 **Scope:** whole repository, one indexable public page (`/`) plus three noindexed trust pages with owner facts filled in, generated `robots.txt` / `sitemap.xml`, metadata, structured data, crawlability, AI/search bot access, content-to-query match.
 **Mode:** audit-and-fix, using only facts supplied by the owner or already in the repo.
