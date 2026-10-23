@@ -18,7 +18,7 @@ import {
   Star,
 } from "lucide-react";
 import Navbar from "./navbar";
-import { Button, MeshBackdrop, Wordmark } from "./ui";
+import { ButtonLink, MeshBackdrop, Wordmark } from "./ui";
 
 /* ─────────────────────────────────────────────────────────────────────────
    Brain Base landing — strict DESIGN.md (Notion) tokens.
@@ -70,12 +70,15 @@ export default function BrainBase({ isAuthed, firstName }: LandingProps) {
     <div className="force-light bg-white text-[#1a1a1a]">
       <PromoBanner />
       <Navbar />
-      <Hero isAuthed={isAuthed} firstName={firstName} />
-      <BoldYellowBanner />
-      <Features />
-      <Philosophy />
-      <Pricing isAuthed={isAuthed} />
-      <CTABanner isAuthed={isAuthed} />
+      <main>
+        <Hero isAuthed={isAuthed} firstName={firstName} />
+        <BoldYellowBanner />
+        <Features />
+        <Philosophy />
+        <Pricing isAuthed={isAuthed} />
+        <Questions />
+        <CTABanner isAuthed={isAuthed} />
+      </main>
       <Footer />
     </div>
   );
@@ -96,8 +99,8 @@ function PromoBanner() {
         boxShadow:
           "0 12px 32px -8px rgba(15,15,15,0.15), 0 4px 12px -4px rgba(15,15,15,0.08)",
       }}
-      initial={{ opacity: 0, y: 16, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ y: 16, scale: 0.96 }}
+      animate={{ y: 0, scale: 1 }}
       transition={{ duration: 0.5, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -2 }}
     >
@@ -168,8 +171,8 @@ function Hero({
         {/* Eyebrow chip */}
         <motion.div
           className="mx-auto inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-[#e5e3df] backdrop-blur-md shadow-[0_1px_2px_rgba(15,15,15,0.04)]"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 10 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           style={{ display: "flex", maxWidth: "fit-content", margin: "0 auto" }}
         >
@@ -193,8 +196,8 @@ function Hero({
         <motion.h1
           className="text-center text-[#1a1a1a] mt-6 mb-5 max-w-4xl mx-auto"
           style={T.hero}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.7, delay: 0.18 }}
         >
           Your second brain,
@@ -214,43 +217,43 @@ function Hero({
         <motion.p
           className="text-center text-[#37352f] max-w-xl mx-auto mb-8"
           style={{ fontSize: "18px", fontWeight: 400, lineHeight: 1.5 }}
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 14 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.6, delay: 0.32 }}
         >
-          Notes, focus timer, daily logs and a learning tracker — all in one
-          calm place. No subscriptions. No noise. Yours forever.
+          Brain Base is a free, open-source second brain app that combines
+          notes, a focus timer, daily logs, a learning tracker and spaced
+          repetition in one calm workspace. It is MIT licensed and
+          self-hostable, so your notes stay on your own machine.
         </motion.p>
 
         {/* CTA row — button-primary + button-secondary, both rounded.md (8px) */}
         <motion.div
           className="flex items-center justify-center gap-3 flex-wrap mb-3"
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 14 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.6, delay: 0.44 }}
         >
-          <a href={primaryHref}>
-            <Button variant="primary" size="lg">
-              {primaryLabel}
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </a>
-          <a
+          <ButtonLink href={primaryHref} variant="primary" size="lg">
+            {primaryLabel}
+            <ArrowRight className="w-4 h-4" />
+          </ButtonLink>
+          <ButtonLink
             href="https://github.com/darshan-regmi/brain-base"
             target="_blank"
             rel="noopener noreferrer"
+            variant="secondary"
+            size="lg"
           >
-            <Button variant="secondary" size="lg">
-              <Github className="w-4 h-4" />
-              View on GitHub
-            </Button>
-          </a>
+            <Github className="w-4 h-4" />
+            View on GitHub
+          </ButtonLink>
         </motion.div>
 
         <motion.p
           className="text-center text-[#787671] text-[13px]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ y: 8 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           MIT licensed · Self-hostable · No card needed
@@ -258,9 +261,10 @@ function Hero({
 
         {/* Workspace mockup — embedded inside the hero with spec deep shadow */}
         <motion.div
-          className="mt-12 md:mt-16 max-w-[1100px] mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          id="preview"
+          className="mt-12 md:mt-16 max-w-[1100px] mx-auto scroll-mt-24"
+          initial={{ y: 30 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <WorkspaceMockup />
@@ -272,8 +276,8 @@ function Hero({
         href="#features"
         aria-label="Scroll to features"
         className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex-col items-center gap-2 group"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ y: 8 }}
+        animate={{ y: 0 }}
         transition={{ duration: 0.6, delay: 1.0 }}
         style={{ animation: "scroll-bob 2.4s ease-in-out infinite" }}
       >
@@ -363,12 +367,13 @@ function WorkspaceMockup() {
 
       <div className="grid grid-cols-1 sm:grid-cols-12 min-h-[460px]">
         {/* Sidebar — collapses to a horizontal scroll chip-row on small screens */}
-        <aside className="sm:col-span-4 md:col-span-3 border-b sm:border-b-0 sm:border-r border-[#e5e3df] bg-[#fafaf9] p-3 flex sm:flex-col gap-1 overflow-x-auto sm:overflow-visible">
+        <div className="sm:col-span-4 md:col-span-3 border-b sm:border-b-0 sm:border-r border-[#e5e3df] bg-[#fafaf9] p-3 flex sm:flex-col gap-1 overflow-x-auto sm:overflow-visible">
           <div className="hidden sm:block px-2 py-1 mb-2">
             <Wordmark size="sm" href={null} />
           </div>
           <input
             disabled
+            aria-label="Search notes (preview)"
             placeholder="Search…"
             className="hidden sm:block text-[12px] px-2.5 py-1.5 rounded-md bg-white border border-[#e5e3df] text-[#787671] mb-2 outline-none"
           />
@@ -405,17 +410,17 @@ function WorkspaceMockup() {
               </span>
             </div>
           ))}
-        </aside>
+        </div>
 
         {/* Main */}
         <div className="sm:col-span-8 md:col-span-9 p-4 sm:p-5 flex flex-col gap-4 bg-white">
           <div className="flex items-baseline justify-between">
-            <h3
+            <p
               className="text-[#1a1a1a]"
               style={{ fontSize: "20px", fontWeight: 600, lineHeight: 1.3 }}
             >
               Today
-            </h3>
+            </p>
             <span className="text-[12px] text-[#787671] font-medium">
               Tuesday · May 8
             </span>
@@ -621,12 +626,10 @@ function BoldYellowBanner() {
             </p>
           </div>
           <div className="col-span-12 md:col-span-4 flex md:justify-end">
-            <a href="#features">
-              <Button variant="dark" size="lg">
-                See the six tools
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </a>
+            <ButtonLink href="#features" variant="dark" size="lg">
+              See the six tools
+              <ArrowRight className="w-4 h-4" />
+            </ButtonLink>
           </div>
         </div>
       </motion.div>
@@ -685,7 +688,7 @@ const FEATURES = [
 
 function Features() {
   return (
-    <Section id="features" className="bg-white">
+    <Section id="features" className="bg-white scroll-mt-24">
       <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
         <span
           className="inline-block px-2.5 py-1 rounded mb-4 text-[#391c57]"
@@ -772,7 +775,7 @@ function FeatureCard({
 
 function Philosophy() {
   return (
-    <Section className="bg-[#f6f5f4]">
+    <Section id="why" className="bg-[#f6f5f4] scroll-mt-24">
       <div className="grid grid-cols-12 gap-8 items-start">
         <div className="col-span-12 md:col-span-4">
           <span
@@ -850,7 +853,7 @@ function Pricing({ isAuthed }: { isAuthed: boolean }) {
   ];
 
   return (
-    <Section id="pricing" className="bg-white">
+    <Section id="pricing" className="bg-white scroll-mt-24">
       <div className="text-center max-w-2xl mx-auto mb-12">
         <span
           className="inline-block px-2.5 py-1 rounded mb-4 text-[#1aae39]"
@@ -939,12 +942,88 @@ function Pricing({ isAuthed }: { isAuthed: boolean }) {
             ))}
           </ul>
 
-          <a href={isAuthed ? "/dashboard" : "/sign-up"} className="block">
-            <Button variant="primary" size="lg" className="w-full">
-              {isAuthed ? "Open dashboard" : "Get Brain Base free"}
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </a>
+          <ButtonLink
+            href={isAuthed ? "/dashboard" : "/sign-up"}
+            variant="primary"
+            size="lg"
+            className="w-full"
+          >
+            {isAuthed ? "Open dashboard" : "Get Brain Base free"}
+            <ArrowRight className="w-4 h-4" />
+          </ButtonLink>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/*  QUESTIONS — plain visible Q&A. No FAQPage markup: rich results ended.       */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+const QUESTIONS = [
+  {
+    q: "What is a second brain app?",
+    a: "A second brain app is a place to capture notes, links and ideas so you can find them again. Brain Base keeps capture, focus, daily logs and review in one workspace instead of spreading them across separate tools.",
+  },
+  {
+    q: "Is Brain Base free?",
+    a: "Yes. The code is MIT licensed and there is one tier: $0, forever. No subscription, no paid plan, and no feature locked behind an upgrade.",
+  },
+  {
+    q: "Can I self-host Brain Base?",
+    a: "Yes. Clone the repository, set DATABASE_URL and AUTH_SECRET, then run it locally or deploy to Vercel. The README walks through database setup and deployment.",
+  },
+  {
+    q: "Where is my data stored?",
+    a: "In the database you configure. Brain Base ships no telemetry and no third-party analytics, so notes stay in your own database rather than a vendor account.",
+  },
+  {
+    q: "How is Brain Base different from Notion or Obsidian?",
+    a: "Brain Base is deliberately narrow. It is a single-user app for notes, focus, daily logs and spaced repetition, not a general workspace with team pages or database views. That focus is the point.",
+  },
+  {
+    q: "Does Brain Base work offline?",
+    a: "It installs as a PWA and its service worker caches the app shell, so you can open it and read cached pages offline. Saving new edits still needs a connection.",
+  },
+];
+
+function Questions() {
+  return (
+    <Section id="questions" className="bg-[#f6f5f4] scroll-mt-24">
+      <div className="max-w-3xl mx-auto">
+        <span
+          className="inline-block px-2.5 py-1 rounded mb-4 text-[#391c57]"
+          style={{
+            background: "#e6e0f5",
+            fontSize: "13px",
+            fontWeight: 600,
+            lineHeight: 1.4,
+          }}
+        >
+          Questions
+        </span>
+        <h2 className="text-[#1a1a1a]" style={T.h1}>
+          Common questions
+        </h2>
+
+        <div className="mt-8 flex flex-col divide-y divide-[#e5e3df] border-y border-[#e5e3df]">
+          {QUESTIONS.map((item) => (
+            <div key={item.q} className="py-6">
+              <h3
+                className="text-[#1a1a1a] mb-2"
+                style={{ fontSize: "18px", fontWeight: 600, lineHeight: 1.4 }}
+              >
+                {item.q}
+              </h3>
+              <p
+                className="text-[#37352f]"
+                style={{ fontSize: "15px", fontWeight: 400, lineHeight: 1.6 }}
+              >
+                {item.a}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </Section>
@@ -993,12 +1072,10 @@ function CTABanner({ isAuthed }: { isAuthed: boolean }) {
               ? "Your second brain is where you left it."
               : "One quiet page. One blinking cursor. The rest is up to you."}
           </p>
-          <a href={href} className="inline-flex">
-            <Button variant="primary" size="lg">
-              {label}
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </a>
+          <ButtonLink href={href} variant="primary" size="lg">
+            {label}
+            <ArrowRight className="w-4 h-4" />
+          </ButtonLink>
         </div>
       </motion.div>
     </section>
@@ -1016,6 +1093,7 @@ function Footer() {
       links: [
         { label: "Features", href: "#features" },
         { label: "Pricing", href: "#pricing" },
+        { label: "FAQ", href: "#questions" },
         { label: "Roadmap", href: "https://github.com/darshan-regmi/brain-base/issues" },
       ],
     },
@@ -1038,7 +1116,7 @@ function Footer() {
     {
       title: "About",
       links: [
-        { label: "Why Brain Base", href: "#" },
+        { label: "Why Brain Base", href: "#why" },
         { label: "Built in public", href: "https://github.com/darshan-regmi/brain-base" },
         { label: "Contact", href: "mailto:hello@brainbase.dev" },
       ],
@@ -1064,12 +1142,12 @@ function Footer() {
 
           {groups.map((g) => (
             <div key={g.title} className="flex flex-col gap-3">
-              <h4
+              <h3
                 className="text-[#1a1a1a]"
                 style={{ fontSize: "13px", fontWeight: 600, lineHeight: 1.4 }}
               >
                 {g.title}
-              </h4>
+              </h3>
               <ul className="flex flex-col gap-2">
                 {g.links.map((l) => (
                   <li key={l.label}>
@@ -1100,8 +1178,16 @@ function Footer() {
             className="text-[#787671]"
             style={{ fontSize: "13px", fontWeight: 400, lineHeight: 1.5 }}
           >
-            MIT © {new Date().getFullYear()} Darshan Regmi · Built in public
-            with ☕
+            MIT © {new Date().getFullYear()}{" "}
+            <a
+              href="https://github.com/darshan-regmi"
+              target="_blank"
+              rel="me noopener noreferrer"
+              className="underline decoration-[#c8c4be] underline-offset-2 hover:text-[#1a1a1a] transition-colors"
+            >
+              Darshan Regmi
+            </a>{" "}
+            · Built in public with ☕
           </p>
           <a
             href="https://github.com/darshan-regmi/brain-base"
