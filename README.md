@@ -165,6 +165,7 @@ Open [http://localhost:3000](http://localhost:3000). Sign up at
 | `pnpm build`     | Build for production (runs `prisma generate` first) |
 | `pnpm start`     | Start the production server                         |
 | `pnpm lint`      | Run ESLint                                          |
+| `pnpm seo:check` | Check robots, sitemap, metadata, JSON-LD and AI-crawler access (needs a running server) |
 | `pnpm db:push`   | Sync Prisma schema → database (no migrations)       |
 | `pnpm db:studio` | Open Prisma Studio                                  |
 | `pnpm db:reset`  | Wipe and recreate the database                      |
