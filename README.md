@@ -1,11 +1,11 @@
-# Brain Base 🧠
+# Brain Base
 
 > The app I built because I was tired of juggling 5 different tools just to stay on top of my day.
 
 An open-source, self-hostable second brain — notes, focus timer, daily logs &
 learning tracker, all in one place. No subscriptions. No noise.
 
-**🌐 [brain-base.darshanregmi.com.np](https://brain-base.darshanregmi.com.np/) — IS NOW LIVE**
+**Live:** [brain-base.darshanregmi.com.np](https://brain-base.darshanregmi.com.np/)
 
 ---
 
@@ -151,7 +151,7 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000). Sign up at
-`/sign-up`, then you're dropped into `/dashboard`. ✦
+`/sign-up`, then you're dropped into `/dashboard`.
 
 > **FOR MORE DETAILED GUIDE PLEASE REFER TO RUN-LOCALLY.md**
 
@@ -368,7 +368,7 @@ server if the warning persists.
 - [x] Dark mode (Lamplight Editorial, committed — no light mode)
 - [x] PWA support (manifest + service-worker shell cache)
 - [ ] Docker setup
-- [x] Public launch 🚀
+- [x] Public launch
 
 ---
 
@@ -393,5 +393,5 @@ MIT © [Darshan Regmi](https://github.com/darshan-regmi)
 ---
 
 <p align="center">
-  Built in public with ☕ and too many open tabs.
+  Built in public.
 </p>
